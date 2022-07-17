@@ -10,6 +10,6 @@ var ProductsSchema = new mongoose.Schema({
     productImageAddress: String,
 });
 
-ProductsSchema.index({ productId: 1 } , { unique : true });
+ProductsSchema.index({ productId: 1 });
 
 module.exports = db.model('Products', ProductsSchema);
