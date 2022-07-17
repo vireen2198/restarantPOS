@@ -20,17 +20,32 @@ const productPriceInput = getEl("#product-price-input");
 const productDescInput = getEl("#product-desc-input");
 const productImageInput = getEl("#product-image-input");
 const productImageCover = getEl(".input-file-cover");
+const productCategoryInput=getEl("#product-category-input");
 const submitBtn = getEl("#submit-product");
 const backToProductsPage=getEl("#go-to-products-page");
 
 //fn
 const displayDateTimeDay=()=>{
+    const dateTimeParent=getEl(".date-time-text")
     const monthArray=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
     const dayArray=['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    const date=new Date().get
-    console.log(date)
+    const a=new Date();
+    const day=a.getDay();
+    const month=a.getMonth();
+    const year=a.getFullYear();
+    const date=a.getDate();
+    const time=a.getTime();
+    let morningEvening=undefined;
+    const hours =a.getHours();
+    if(hours<=12){
+        morningEvening="a.m."
+    }else{
+        morningEvening="p.m."
+    }
+    dateTimeParent.textContent=`${dayArray[day]}, ${date} ${monthArray[month]} ${year}, ${a.toString().split(" ")[4]} ${morningEvening}`
 }
-displayDateTimeDay()
+
+setInterval(displayDateTimeDay,1000)
 const getImage= (element)=>{
     return new Promise((resolve,reject)=>{
         let file = element.files[0];
@@ -63,7 +78,8 @@ const sendToServer = async () => {
         productNameInput.value,
         productPriceInput.value,
         productDescInput.value,
-        image64Str
+        image64Str,
+        productCategoryInput.value
       );
       
       const { data } = await axios.post("/products/addProducts", newObj);
@@ -71,27 +87,24 @@ const sendToServer = async () => {
       return serverMsg(message)
       
     } catch (error) {
-        const {message,data}=error.response;
-        if(data){
-            const {message:smallMsg}=data;
-            if(smallMsg)return serverMsg(message,false);
-        }
+        const {message}=error.response.data;
         if(message)return serverMsg(message,false);
         return serverMsg("something went wrong!!! please try again later",false);
     }
   };
 class Product {
-  constructor(productName, productPrice, productDescription,productImageAddress) {
+  constructor(productName, productPrice, productDescription,productImageAddress,productCategory) {
     this.productName = productName;
     this.productPrice = productPrice;
     this.productDescription = productDescription;
-    this.productImageAddress=productImageAddress
+    this.productImageAddress=productImageAddress;
+    this.productCategory=productCategory;
   }
 }
 
 //event listeners
 submitBtn.addEventListener("click",()=>{
-    const allInputs=[productImageInput,productNameInput,productPriceInput,productDescInput];
+    const allInputs=[productImageInput,productNameInput,productPriceInput,productDescInput,productCategoryInput];
     const validity=allInputs.every(input=>input.reportValidity());
     if(!validity)return
     sendToServer()

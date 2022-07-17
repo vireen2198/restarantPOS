@@ -64,7 +64,17 @@
     
     border-radius: .3vw;
     height:10vw;
-    
+    border-radius: .2vw;
+    outline: none;
+    border:1px solid midnightblue;
+}
+#product-category-input{
+    padding:1vw;
+    width: 100%;
+    text-transform: capitalize;
+    font-size: 1vw;
+    border:1px solid midnightblue;
+    outline: none;
 }
 .display-column{
     display: flex;
@@ -91,8 +101,16 @@
     transition: .3s ease-in-out;
 
 }
+
 #submit-product:hover{
     background-color: maroon;
+}
+
+#product-name-input:active,#product-name-input:focus,#product-price-input:active,#product-price-input:focus,
+#product-desc-input:active,#product-desc-input:focus,#product-category-input:active,#product-category-input:focus{
+    border: 1px solid royalblue;
+    outline: none;
+    
 }
 .server-msg{
     
