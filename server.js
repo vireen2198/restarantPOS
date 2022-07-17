@@ -14,22 +14,23 @@ mongoose.Promoise = global.Promise;
 mongoose.set('debug', false);
 
 app.use(compression());
-
+app.use(express.static("public"))
 app.use(express.json({
-    limit: '50mb' 
+    limit: '100mb' 
 }));
 
-app.use(express.static("public"))
+
 
 app.use(express.urlencoded({ 
     extended: true,
     parameterLimit: 100000,
-    limit: '50mb' 
+    limit: '100mb' 
 }));
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json({ limit: '10mb', extended: true }));
+app.use(bodyParser.json({ limit: '100mb', extended: true }));
 app.options('*', cors());
+
 app.use(upload())
 
 let port = process.env.PORT;

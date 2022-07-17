@@ -18,7 +18,9 @@
 .input-file-cover{
    z-index: 0;
     border:2px midnightblue dashed;
-   
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-position: center;
     background-color: #fff;
     display: flex;
     flex-direction: row;
@@ -91,4 +93,20 @@
 }
 #submit-product:hover{
     background-color: maroon;
+}
+.server-msg{
+    
+    color:seagreen;
+    text-transform: capitalize;
+    font-size: 1.1vw;
+    text-align: center;
+    letter-spacing: .1vw;
+    opacity: 0;
+
+}
+.server-err-msg{
+    color:red
+}
+.opacity{
+    opacity:1
 }
