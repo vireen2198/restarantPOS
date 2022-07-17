@@ -18,4 +18,8 @@ module.exports = {
     async deleteProducts(params) {
         return await Products.findOneAndRemove({'_id' : params._id})
     },
+
+    async searchProducts(params) {
+        return await Products.find({ 'productName': { $regex: params.productName } })
+    },
 }

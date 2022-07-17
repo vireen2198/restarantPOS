@@ -17,4 +17,8 @@ module.exports = {
     async deleteProducts(params) {
         return await productsDao.deleteProducts(params)
     },
+
+    async searchProducts(params) {
+        return await productsDao.searchProducts(params)
+    },
 }

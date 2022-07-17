@@ -13,7 +13,7 @@ module.exports = {
     async getProducts(req, res) {
         try {
             let products = await productsService.getProducts()
-            res.status(200).send({ products, message: 'Product retrieved successfully' })
+            res.status(200).send({ products, message: 'Products retrieved successfully' })
         } catch (e) {
             res.status(400).send({ e: true, message: e.message });
         }
@@ -32,6 +32,15 @@ module.exports = {
         try {
             await productsService.deleteProducts(req.body)
             res.status(200).send({ message: 'Product removed successfully' })
+        } catch (e) {
+            res.status(400).send({ e: true, message: e.message });
+        }
+    },
+
+    async searchProducts(req, res) {
+        try {
+            let products = await productsService.searchProducts(req.body)
+            res.status(200).send({ products, message: 'Product retrieved successfully' })
         } catch (e) {
             res.status(400).send({ e: true, message: e.message });
         }
