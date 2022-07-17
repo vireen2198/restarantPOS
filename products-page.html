@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./stylesheets/index.css">
+    <link rel="stylesheet" href="./stylesheets/products-page.css">
+    <title>Products Page</title>
+</head>
+<body>
+    <div class="page-wrapper">
+        <nav>
+            <a href="http://" class="current-page-active">
+                <ion-icon name="home"></ion-icon>
+                home
+                
+            </a>
+            <a href="http://">
+                <ion-icon name="fast-food"></ion-icon> 
+                products
+            </a>
+            <a href="http://">
+                <ion-icon name="layers"></ion-icon>
+                
+                transactions
+            </a>
+            <a href="http://">
+                <ion-icon name="cash"></ion-icon>
+                cashier
+                
+            </a>
+            <a href="http://">
+                <ion-icon name="settings"></ion-icon>
+                settings
+            </a>
+        </nav>
+        <div class="content-wrapper">
+            <div class="greeting-time-container">
+                <p class="greeting-admin">welcome salman</p>
+                <p class="date-time-text">Mon, 17 july 2022 1843 hours</p>
+            </div>
+            <div class="current-page-add-new-wrapper">
+                <a class="current-page">products</a>
+                <input type="button" value="Add New Product" id="add-new-product-btn">
+            </div>
+            
+                <div class="products-header-sort-wrapper">
+                    <p class="sub-title">
+                        All Products
+                    </p>
+                    <div class="search-box-parent">
+                        <input type="search" name="" id="search-products-box" placeholder="Search Products Here ...">
+                        <div class="search-btn-parent">
+                            <ion-icon name="search"></ion-icon>
+                        </div>
+                    </div>
+                   
+                    <div class="select-container">
+                        <p>sort by</p>
+                        <select name="" id="sort-by-products">
+                            <option value="">most recent</option>
+                            <option value="">most oldest</option>
+                            <option value="">price: high to low</option>
+                            <option value="">price: low to high</option>
+                            <option value="">alphabetical: A-Z</option>
+                            <option value="">alphabetical: Z-A</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="all-products-wrapper">
+                    <div class="single-product-container">
+                        <img src="./images/th.jpg" alt="" class="products-img">
+                        <div class="edit-delete-wrapper">
+                            <ion-icon name="create" class="edit"></ion-icon>
+                            <ion-icon name="trash" class="delete"></ion-icon>
+                        </div>
+                        <div class="item-desc-wrapper">
+                            <p class="item-name">roti naan</p>
+                            <p class="item-price">rm 20</p>
+                        </div>
+                        
+                    </div>
+                    <div class="single-product-container">
+                        <img src="./images/th.jpg" alt="" class="products-img">
+                        <div class="edit-delete-wrapper">
+                            <ion-icon name="create" class="edit"></ion-icon>
+                            <ion-icon name="trash" class="delete"></ion-icon>
+                        </div>
+                        <div class="item-desc-wrapper">
+                            <p class="item-name">roti naan</p>
+                            <p class="item-price">rm 20</p>
+                        </div>
+                        
+                    </div>
+                    <div class="single-product-container">
+                        <img src="./images/th.jpg" alt="" class="products-img">
+                        <div class="edit-delete-wrapper">
+                            <ion-icon name="create" class="edit"></ion-icon>
+                            <ion-icon name="trash" class="delete"></ion-icon>
+                        </div>
+                        <div class="item-desc-wrapper">
+                            <p class="item-name">roti naan</p>
+                            <p class="item-price">rm 20</p>
+                        </div>
+                        
+                    </div>
+                    <div class="single-product-container">
+                        <img src="./images/th.jpg" alt="" class="products-img">
+                        <div class="edit-delete-wrapper">
+                            <ion-icon name="create" class="edit"></ion-icon>
+                            <ion-icon name="trash" class="delete"></ion-icon>
+                        </div>
+                        <div class="item-desc-wrapper">
+                            <p class="item-name">roti naan</p>
+                            <p class="item-price">rm 20</p>
+                        </div>
+                        
+                    </div>
+                    <div class="single-product-container">
+                        <img src="./images/th.jpg" alt="" class="products-img">
+                        <div class="edit-delete-wrapper">
+                            <ion-icon name="create" class="edit"></ion-icon>
+                            <ion-icon name="trash" class="delete"></ion-icon>
+                        </div>
+                        <div class="item-desc-wrapper">
+                            <p class="item-name">roti naan</p>
+                            <p class="item-price">rm 20</p>
+                        </div>
+                        
+                    </div>
+                    <div class="single-product-container">
+                        <img src="./images/th.jpg" alt="" class="products-img">
+                        <div class="edit-delete-wrapper">
+                            <ion-icon name="create" class="edit"></ion-icon>
+                            <ion-icon name="trash" class="delete"></ion-icon>
+                        </div>
+                        <div class="item-desc-wrapper">
+                            <p class="item-name">roti naan</p>
+                            <p class="item-price">rm 20</p>
+                        </div>
+                        
+                    </div>
+                    <div class="single-product-container">
+                        <img src="./images/th.jpg" alt="" class="products-img">
+                        <div class="edit-delete-wrapper">
+                            <ion-icon name="create" class="edit"></ion-icon>
+                            <ion-icon name="trash" class="delete"></ion-icon>
+                        </div>
+                        <div class="item-desc-wrapper">
+                            <p class="item-name">roti naan</p>
+                            <p class="item-price">rm 20</p>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- <p class="sub-title">
+                    your items
+                </p>
+                <div class="stats-ui-wrapper">
+                    <div class="stats-ui green">
+                        <div class="stats-header-parent">
+                            <p class="stats-header">total products</p>
+                            <ion-icon name="card-outline"></ion-icon>
+                        </div>
+                       
+                        <span class="total-profit">$18000</span>
+                    </div>
+                    <div class="stats-ui green">
+                        <div class="stats-header-parent">
+                            <p class="stats-header">new product</p>
+                            <ion-icon name="calculator"></ion-icon>
+                        </div>
+                       
+                        <span class="total-profit">$18000</span>
+                    </div>
+                    <div class="stats-ui green">
+                        <div class="stats-header-parent">
+                            <p class="stats-header">hot selling product</p>
+                            <ion-icon name="cash"></ion-icon>
+                        </div>
+                       
+                        <span class="total-profit">$18000</span>
+                    </div>
+                    <div class="stats-ui green">
+                        <div class="stats-header-parent">
+                            <p class="stats-header">products sold</p>
+                            <ion-icon name="fish"></ion-icon>
+                        </div>
+                       
+                        <span class="total-profit">$18000</span>
+                    </div>
+                </div>
+                <p class="sub-title">
+                    your social medias
+                </p>
+                <div class="stats-ui-wrapper">
+                    <div class="stats-ui rosybrown ">
+                        <div class="stats-header-parent facebook-blue stats-ui-padding">
+                            <p class="stats-header">facebook</p>
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </div>
+                       
+                        <span class="total-profit margin-auto">100 followers</span>
+                    </div>
+                    <div class="stats-ui rosybrown ">
+                        <div class="stats-header-parent insta-color stats-ui-padding">
+                            <p class="stats-header">instagram</p>
+                            <ion-icon name="logo-instagram"></ion-icon>
+                        </div>
+                       
+                        <span class="total-profit margin-auto">100 followers</span>
+                    </div>
+                    <div class="stats-ui rosybrown">
+                        <div class="stats-header-parent twitter-color stats-ui-padding">
+                            <p class="stats-header">twitter</p>
+                            <ion-icon name="logo-twitter"></ion-icon>
+                        </div>
+                       
+                        <span class="total-profit margin-auto">100 followers</span>
+                    </div>
+                    <div class="stats-ui rosybrown ">
+                        <div class="stats-header-parent tiktok-color stats-ui-padding">
+                            <p class="stats-header">tiktok</p>
+                            <ion-icon name="logo-tiktok"></ion-icon>
+                        </div>
+                       
+                        <span class="total-profit margin-auto">100 followers</span>
+                    </div>
+                </div>
+            </div> -->
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="./javascripts/index.js" defer></script>
+</body>
+</html>
