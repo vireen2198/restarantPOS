@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./stylesheets/index.css">
+    <link rel="stylesheet" href="./stylesheets/add-edit-products.css">
+    <title>Add/Edit Products</title>
+</head>
+<body>
+    <div class="page-wrapper">
+        <nav>
+            <a href="http://" class="current-page-active">
+                <ion-icon name="home"></ion-icon>
+                home
+                
+            </a>
+            <a href="http://">
+                <ion-icon name="fast-food"></ion-icon> 
+                products
+            </a>
+            <a href="http://">
+                <ion-icon name="layers"></ion-icon>
+                
+                transactions
+            </a>
+            <a href="http://">
+                <ion-icon name="cash"></ion-icon>
+                cashier
+                
+            </a>
+            <a href="http://">
+                <ion-icon name="settings"></ion-icon>
+                settings
+            </a>
+        </nav>
+        <div class="content-wrapper">
+            <div class="greeting-time-container">
+                <p class="greeting-admin">welcome salman</p>
+                <p class="date-time-text">Mon, 17 july 2022 1843 hours</p>
+            </div>
+            <div class="current-page-add-new-wrapper">
+                <a class="current-page">add/edit products</a>
+                <input type="button" value="Back To Products" id="go-to-products-page">
+            </div>
+            <div class="new-products-wrapper">
+                <h3>Complete this form and you are all set</h3>
+                <p class="add-new-product-header">product image (required)</p>
+                <div class="image-input-container">
+                    <input type="file" name="" id="product-image-input">
+                    <div class="input-file-cover">
+                        <p>add image here...</p>
+                    </div>
+                </div>
+                <p class="add-new-product-header">product name (required)</p>
+                <div class="product-input-wrapper">
+                    <input type="text" name="" id="product-name-input" placeholder="product name required">
+                </div>
+                <p class="add-new-product-header">product price (required)</p>
+                <div class="product-input-wrapper">
+                    <input type="number" name="" id="product-price-input" placeholder="product price required (RM)">
+                </div>
+                <p class="add-new-product-header">product description (optional)</p>
+                <div class="product-input-wrapper display-column">
+                    <textarea name="" id="product-desc-input" cols="30" rows="10" placeholder="say something about your products (optional)"></textarea>
+                    <p class="characters-remaining">300 characters remaining</p>                    
+                </div>
+                <div class="product-input-wrapper display-column">
+                    <input type="button" value="save product" id="submit-product">                
+                </div>
+                
+            </div>
+            
+            
+
+        </div>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="./javascripts/index.js" defer></script>
+</body>
+</html>
