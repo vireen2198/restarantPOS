@@ -6,6 +6,8 @@ var ProductsSchema = new mongoose.Schema({
     productId: { type: mongoose.Types.ObjectId },
     productName: String,
     productPrice: String,
+    productDescription: String,
+    
 });
 
 ProductsSchema.index({ name:1 });
