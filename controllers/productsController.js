@@ -1,13 +1,20 @@
 let productsService = require("../services/productsService")
 
 module.exports = {
-    async addProducts(req, res) {
+    async addProducts(req, res, errorHandler) {
         try {
             await productsService.addProducts(req.body)
             res.status(200).send({ message: 'Product added successfully' })
-        } catch (e) {
-            res.status(400).send({ e: true, message: e.message });
-        }
+        } catch (err) {
+                // Set custom error for unique keys
+                let errMsg;
+                if (err.code == 11000) {
+                  errMsg = Object.keys(err.keyValue)[0] + " already exists.";
+                } else {
+                  errMsg = err.message;
+                }
+                res.status(400).json({ statusText: "Bad Request", message: errMsg });
+          }
     },
 
     async getProducts(req, res) {
