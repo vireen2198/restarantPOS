@@ -20,6 +20,9 @@
 .products-img{
     width: 100%;
     border-radius: .3vw;
+    height:10vw;
+    z-index:0;
+   
 }
 .single-product-container{
     
@@ -44,7 +47,8 @@
     align-items: center;
     position: absolute;
     top:1.5vw;
-    right:1vw
+    right:1vw;
+    z-index: 1;
 }
 .edit{
     color:midnightblue
