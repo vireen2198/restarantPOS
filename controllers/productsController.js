@@ -19,6 +19,15 @@ module.exports = {
         }
     },
 
+    async getProduct(req, res) {
+        try {
+            let product = await productsService.getProduct(req.body)
+            res.status(200).send({ product, message: 'Product retrieved successfully' })
+        } catch (e) {
+            res.status(400).send({ e: true, message: e.message });
+        }
+    },
+
     async editProducts(req, res) {
         try {
             await productsService.editProducts(req.body)

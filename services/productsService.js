@@ -10,6 +10,10 @@ module.exports = {
         return await productsDao.getProducts()
     },
 
+    async getProduct(params) {
+        return await productsDao.getProduct(params)
+    },
+
     async editProducts(params) {
         return await productsDao.editProducts(params)
     },

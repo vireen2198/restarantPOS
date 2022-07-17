@@ -11,6 +11,10 @@ module.exports = {
         return await Products.find()
     },
 
+    async getProduct(params) {
+        return await Products.find({'_id' : params._id})
+    },
+
     async editProducts(params) {
         return await Products.findOneAndUpdate({'_id' : params._id}, params)
     },
@@ -20,6 +24,10 @@ module.exports = {
     },
 
     async searchProducts(params) {
-        return await Products.find({ 'productName': { $regex: params.productName } })
+        return await Products.find(
+            { $or: [ 
+               { productName: { $regex: params.productName } },
+               { productCategory: { $regex: params.productCategory } } 
+            ] })
     },
 }
