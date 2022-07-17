@@ -21,9 +21,16 @@ const productDescInput = getEl("#product-desc-input");
 const productImageInput = getEl("#product-image-input");
 const productImageCover = getEl(".input-file-cover");
 const submitBtn = getEl("#submit-product");
+const backToProductsPage=getEl("#go-to-products-page");
 
 //fn
-
+const displayDateTimeDay=()=>{
+    const monthArray=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+    const dayArray=['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    const date=new Date().get
+    console.log(date)
+}
+displayDateTimeDay()
 const getImage= (element)=>{
     return new Promise((resolve,reject)=>{
         let file = element.files[0];
@@ -64,8 +71,13 @@ const sendToServer = async () => {
       return serverMsg(message)
       
     } catch (error) {
-        const {message}=error.response.data
-       if(message)return serverMsg(message,false)
+        const {message,data}=error.response;
+        if(data){
+            const {message:smallMsg}=data;
+            if(smallMsg)return serverMsg(message,false);
+        }
+        if(message)return serverMsg(message,false);
+        return serverMsg("something went wrong!!! please try again later",false);
     }
   };
 class Product {
@@ -98,4 +110,7 @@ productDescInput.addEventListener("keyup",()=>{
     const charactersRemainingText=getEl(".characters-remaining")
     const charactersLength=300
     charactersRemainingText.textContent=`${charactersLength-productDescInput.value.length} characters remaining`
+})
+backToProductsPage.addEventListener("click",()=>{
+    return window.location.href=`${url}/products-page.html`
 })
