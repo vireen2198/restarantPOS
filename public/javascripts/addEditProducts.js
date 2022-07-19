@@ -1,13 +1,4 @@
 const url = `http://localhost:8080`;
-// const getProducts=async()=>{
-//     try {
-//         const {data}=await axios.post(`/products/getProducts`)
-//         console.log(data)
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
-// getProducts()
 const getEl = (elName, parent = document) => {
   return parent.querySelector(elName);
 };
@@ -23,6 +14,7 @@ const productImageCover = getEl(".input-file-cover");
 const productCategoryInput=getEl("#product-category-input");
 const submitBtn = getEl("#submit-product");
 const backToProductsPage=getEl("#go-to-products-page");
+const toUpdateId=window.location.search.split("=")[1]
 
 //fn
 const displayDateTimeDay=()=>{
@@ -43,8 +35,7 @@ const displayDateTimeDay=()=>{
         morningEvening="p.m."
     }
     dateTimeParent.textContent=`${dayArray[day]}, ${date} ${monthArray[month]} ${year}, ${a.toString().split(" ")[4]} ${morningEvening}`
-}
-
+};
 setInterval(displayDateTimeDay,1000)
 const getImage= (element)=>{
     return new Promise((resolve,reject)=>{
@@ -59,7 +50,7 @@ const getImage= (element)=>{
         };
         reader.readAsDataURL(file);
     })
-}
+};
 const serverMsg=(message,stat=true)=>{
     const serverText=getEl(".server-msg");
     serverText.textContent=message;
@@ -69,7 +60,7 @@ const serverMsg=(message,stat=true)=>{
         serverText.classList.remove("opacity");
         serverText.classList.remove("server-err-msg");
     },3000)
-}  
+}  ;
 const sendToServer = async () => {
     try {
       const image64Str=await getImage(productImageInput)
@@ -92,6 +83,17 @@ const sendToServer = async () => {
         return serverMsg("something went wrong!!! please try again later",false);
     }
   };
+const displayExistingProduct=async(_id)=>{
+    try {
+        const {data}=await axios.post("/products/getProduct",{_id});
+        console.log(data)
+    } catch (error) {
+        console.log(data)
+    }
+}
+if(toUpdateId){
+    displayExistingProduct(toUpdateId)
+}
 class Product {
   constructor(productName, productPrice, productDescription,productImageAddress,productCategory) {
     this.productName = productName;
@@ -127,3 +129,4 @@ productDescInput.addEventListener("keyup",()=>{
 backToProductsPage.addEventListener("click",()=>{
     return window.location.href=`${url}/products-page.html`
 })
+console.log(window.location.search.split("=")[1])

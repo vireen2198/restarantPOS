@@ -55,7 +55,7 @@ module.exports = {
 
     async searchProducts(req, res) {
         try {
-            let products = await productsService.searchProducts(req.body)
+            let products = await productsService.searchProducts(req.body);
             res.status(200).send({ products, message: 'Product retrieved successfully' })
         } catch (e) {
             res.status(400).send({ e: true, message: e.message });
