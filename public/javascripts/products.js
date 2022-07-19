@@ -38,19 +38,11 @@ setInterval(displayDateTimeDay,1000)
 const reloadPage=()=>{
     return window.location.href=`${url}/products-page.html`
 }
-const findCertainProducts=async(value)=>{
-    try {
-        const {data}=await axios.post("/products/searchProducts",{productName:value});
-        const {products}=data;
-
-    } catch (error) {
-        console.log(error)
-    }
-}
 const getProducts=async(value)=>{
     try {
+        const sortBy=getEl("#sort-by-products");
         if(value){
-            const {data}=await axios.post("/products/searchProducts",{productName:value});
+            const {data}=await axios.post(`/products/searchProducts?sort=${sortBy.value}`,{productName:value});
             return data
         }
         const {data}=await axios.post(`/products/getProducts`)

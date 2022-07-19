@@ -26,8 +26,7 @@ module.exports = {
     async searchProducts(params) {
         return await Products.find(
             { $or: [ 
-               { productName: { $regex: params.productName } },
-               { productCategory: { $regex: params.productCategory } } 
+               { productName: { $regex: params.productName } }
             ] })
     },
 }
