@@ -1,7 +1,7 @@
-const getElByClass=(elName,parent)=>{
+const getElByClass = (elName, parent) => {
     return parent.querySelector(elName)
 }
-const getElementsByClass=(elName,parent=document)=>{
+const getElementsByClass = (elName, parent = document) => {
     return parent.querySelectorAll(elName)
 }
 // const statsUi=[...getElementsByClass(".stats-ui")];

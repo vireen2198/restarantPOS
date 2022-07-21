@@ -1,91 +1,91 @@
 
 const getEl = (elName, parent = document) => {
-  return parent.querySelector(elName);
+    return parent.querySelector(elName);
 };
 const getAllEl = (elName, parent = document) => {
-  return parent.querySelectorAll(elName);
+    return parent.querySelectorAll(elName);
 };
 const createEl = (elName) => {
     return document.createElement(elName);
-  };
+};
 //variables
 const url = `http://localhost:8080`;
-const addNewProductsPage=getEl("#add-new-product-btn");
-const searchInput=getEl("#search-products-box");
-const searchBox=getEl(".search-btn-parent");
+const addNewProductsPage = getEl("#add-new-product-btn");
+const searchInput = getEl("#search-products-box");
+const searchBox = getEl(".search-btn-parent");
 //fn
-const displayDateTimeDay=()=>{
-    const dateTimeParent=getEl(".date-time-text")
-    const monthArray=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
-    const dayArray=['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    const a=new Date();
-    const day=a.getDay();
-    const month=a.getMonth();
-    const year=a.getFullYear();
-    const date=a.getDate();
-    const time=a.getTime();
-    let morningEvening=undefined;
-    const hours =a.getHours();
-    if(hours<=12){
-        morningEvening="a.m."
-    }else{
-        morningEvening="p.m."
+const displayDateTimeDay = () => {
+    const dateTimeParent = getEl(".date-time-text")
+    const monthArray = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+    const dayArray = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    const a = new Date();
+    const day = a.getDay();
+    const month = a.getMonth();
+    const year = a.getFullYear();
+    const date = a.getDate();
+    const time = a.getTime();
+    let morningEvening = undefined;
+    const hours = a.getHours();
+    if (hours <= 12) {
+        morningEvening = "a.m."
+    } else {
+        morningEvening = "p.m."
     }
-    dateTimeParent.textContent=`${dayArray[day]}, ${date} ${monthArray[month]} ${year}, ${a.toString().split(" ")[4]} ${morningEvening}`
+    dateTimeParent.textContent = `${dayArray[day]}, ${date} ${monthArray[month]} ${year}, ${a.toString().split(" ")[4]} ${morningEvening}`
 }
 
-setInterval(displayDateTimeDay,1000)
-const reloadPage=()=>{
-    return window.location.href=`${url}/products-page.html`
+setInterval(displayDateTimeDay, 1000)
+const reloadPage = () => {
+    return window.location.href = `${url}/products-page.html`
 }
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-const displayLoader=async()=>{
-    const loaderParent=getEl(".loading-img-div");
+const displayLoader = async () => {
+    const loaderParent = getEl(".loading-img-div");
     loaderParent.classList.add("show-loader");
     await delay(1000);
     loaderParent.classList.remove("show-loader");
-    
+
 }
 
-const getProducts=async(value)=>{
+const getProducts = async (value) => {
     try {
 
-        const sortBy=getEl("#sort-by-products");
-        if(value){
-            const {data}=await axios.post(`/products/searchProducts?sort=${sortBy.value}`,{productName:value});
+        const sortBy = getEl("#sort-by-products");
+        if (value) {
+            const { data } = await axios.post(`/products/searchProducts?sort=${sortBy.value}`, { productName: value });
             return data
         }
-        const {data}=await axios.post(`/products/getProducts`)
+        const { data } = await axios.post(`/products/getProducts`)
         return data
     } catch (error) {
         return reloadPage()
     }
 }
-const displayAllProducts=async(value)=>{
+const displayAllProducts = async (value) => {
     try {
         await displayLoader()
-        const {products}=await getProducts(value);
-        const allProductsParent=getEl(".all-products-wrapper");
-        const deleteUnwantedProducts=getAllEl(".single-product-container");
-        if(deleteUnwantedProducts.length){
-            deleteUnwantedProducts.forEach((unwanted)=>{
+        const { products } = await getProducts(value);
+        const allProductsParent = getEl(".all-products-wrapper");
+        const deleteUnwantedProducts = getAllEl(".single-product-container");
+        if (deleteUnwantedProducts.length) {
+            deleteUnwantedProducts.forEach((unwanted) => {
                 allProductsParent.removeChild(unwanted)
             })
         }
-        if(!products.length&&value)return displayNoProducts(hasValue=true)
-        if(!products.length)return displayNoProducts()
-        products.map((product,i)=>{
-            const noContentWrapper=getEl(".no-content-parent");
-            if(noContentWrapper){
-                const contentWrapper=getEl(".content-wrapper");
+        if (!products.length && value) return displayNoProducts(hasValue = true)
+        if (!products.length) return displayNoProducts()
+        products.map((product, i) => {
+            const noContentWrapper = getEl(".no-content-parent");
+            if (noContentWrapper) {
+                const contentWrapper = getEl(".content-wrapper");
                 contentWrapper.removeChild(noContentWrapper)
             }
-            const {productImageAddress,productPrice,productName,_id}=product;
-            const div=createEl("div");
+            const { productImageAddress, productPrice, productName, _id } = product;
+            const div = createEl("div");
             div.classList.add("single-product-container")
-            div.innerHTML=`
+            div.innerHTML = `
             <img src="${productImageAddress}" alt="" class="products-img">
             <div class="edit-delete-wrapper">
                 <ion-icon name="create" class="edit" id="edit-btn"></ion-icon>
@@ -96,49 +96,49 @@ const displayAllProducts=async(value)=>{
                 <p class="item-price">rm ${productPrice}</p>
             </div>
             `
-            const deleteBtn=getEl("#delete-btn",div);
-            const editBtn=getEl("#edit-btn",div);
-            deleteBtn.addEventListener("click",()=>deleteProduct(_id));
-            editBtn.addEventListener("click",()=>editProduct(_id))
+            const deleteBtn = getEl("#delete-btn", div);
+            const editBtn = getEl("#edit-btn", div);
+            deleteBtn.addEventListener("click", () => deleteProduct(_id));
+            editBtn.addEventListener("click", () => editProduct(_id))
             allProductsParent.appendChild(div);
 
         })
-        
+
     } catch (error) {
         console.log(error)
     }
 }
 
-const deleteProduct=async(_id)=>{
+const deleteProduct = async (_id) => {
     try {
-        
-        const {data}=await axios.post("/products/deleteProducts",{_id});
+
+        const { data } = await axios.post("/products/deleteProducts", { _id });
         displayAllProducts()
 
     } catch (error) {
         console.log(error)
     }
 }
-const editProduct=(id)=>{
-   return window.location.href=`${url}/add-edit-products.html?_id=${id}`
+const editProduct = (id) => {
+    return window.location.href = `${url}/add-edit-products.html?_id=${id}`
 }
 
-const displayNoProducts=(hasValue=false)=>{
-    const div=createEl("div");
+const displayNoProducts = (hasValue = false) => {
+    const div = createEl("div");
     div.classList.add("no-content-parent")
-    if(hasValue){
-        div.innerHTML=`
+    if (hasValue) {
+        div.innerHTML = `
         <p>you dont have matching items related to your search...</p>
         `
-    }else{
-        div.innerHTML=`
+    } else {
+        div.innerHTML = `
         <p>you dont have any items listed yet ...</p>
         `
     }
-    const contentWrapper=getEl(".content-wrapper");
-    const noContentParent=getAllEl(".no-content-parent");
-    if(noContentParent.length){
-        noContentParent.forEach(parent=>{
+    const contentWrapper = getEl(".content-wrapper");
+    const noContentParent = getAllEl(".no-content-parent");
+    if (noContentParent.length) {
+        noContentParent.forEach(parent => {
             contentWrapper.removeChild(parent)
         })
     }
@@ -148,11 +148,11 @@ const displayNoProducts=(hasValue=false)=>{
 displayAllProducts()
 
 //event listener
-addNewProductsPage.addEventListener("click",()=>{
-    return window.location.href=`${url}/add-edit-products.html`
+addNewProductsPage.addEventListener("click", () => {
+    return window.location.href = `${url}/add-edit-products.html`
 })
-searchBox.addEventListener("click",()=>{
-    const checkInput=searchInput.reportValidity();
-    if(!checkInput)return 
+searchBox.addEventListener("click", () => {
+    const checkInput = searchInput.reportValidity();
+    if (!checkInput) return
     return displayAllProducts(searchInput.value)
 })
