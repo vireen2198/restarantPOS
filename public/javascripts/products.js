@@ -38,8 +38,20 @@ setInterval(displayDateTimeDay,1000)
 const reloadPage=()=>{
     return window.location.href=`${url}/products-page.html`
 }
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+const displayLoader=async()=>{
+    const loaderParent=getEl(".loading-img-div");
+    loaderParent.classList.add("show-loader");
+    await delay(1000);
+    loaderParent.classList.remove("show-loader");
+    
+}
+
 const getProducts=async(value)=>{
     try {
+
         const sortBy=getEl("#sort-by-products");
         if(value){
             const {data}=await axios.post(`/products/searchProducts?sort=${sortBy.value}`,{productName:value});
@@ -53,6 +65,7 @@ const getProducts=async(value)=>{
 }
 const displayAllProducts=async(value)=>{
     try {
+        await displayLoader()
         const {products}=await getProducts(value);
         const allProductsParent=getEl(".all-products-wrapper");
         const deleteUnwantedProducts=getAllEl(".single-product-container");
