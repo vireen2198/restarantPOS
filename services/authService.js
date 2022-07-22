@@ -1,13 +1,11 @@
 const UserDao = require('../daos/authDao')
+const bcrypt = require('../config/bcrypt')
+
 module.exports = {
     login: async function (loginDto) {
-
-        if (loginDto != undefined) {
-            let localUser = await UserDao.findUser(loginDto)
-
-            if (undefined == localUser || null == localUser) {
-                throw new Error("Username and Password does not match")
-            }
+        let localUser = await UserDao.findUser(loginDto)
+        let password = await bcrypt.comparePwd(loginDto.password , localUser.password)
+        if (password == true) {
 
             let user = {
                 '_id' : localUser._id.toString().replace(/ObjectId\("(.*)"\)/, "$1"),
@@ -21,7 +19,8 @@ module.exports = {
             let returnobj = JSON.parse(JSON.stringify(localUser));
 
             return returnobj;
-        } else {
+        } 
+        else {
             throw new Error("Unable to find user.")
         }
     },

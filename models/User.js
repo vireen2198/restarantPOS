@@ -13,6 +13,7 @@ var UserSchema = new mongoose.Schema({
   updated_by: String,
   dummy: Boolean,
   loggedIn: String,
+  isAdmin: Boolean,
   lastLogin: { type: Date, default: Date.now }
 });
 

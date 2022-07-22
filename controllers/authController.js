@@ -4,7 +4,7 @@ let Util = require('../Util')
 module.exports = {
     login: async function (req, res) {
         try {
-            let response = await authService.login(req.body.login);   // TODO Refactor 6 months after April 2021 
+            let response = await authService.login(req.body);   // TODO Refactor 6 months after April 2021 
             let token = await Util.setupTokenForJwt(response)
             res.status(200).send({response, token , message:'User retrieved successfully'});
         } catch (e) {

@@ -7,12 +7,7 @@ module.exports = {
     if (params.username) {
       searchObj.username = params.username
     }
-
-    if (params.password) {
-      searchObj.password = params.password
-    }
-
-
+    
     return await User.findOne(searchObj)
   },
 
