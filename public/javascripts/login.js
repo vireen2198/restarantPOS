@@ -1,12 +1,12 @@
 //
 const getEl = (elName, parent = document) => {
-    return parent.querySelector(elName);
+  return parent.querySelector(elName);
 };
 const getAllEl = (elName, parent = document) => {
-    return [...parent.querySelectorAll(elName)];
+  return [...parent.querySelectorAll(elName)];
 };
 const createEl = (elName) => {
-    return document.createElement(elName);
+  return document.createElement(elName);
 };
 //variables
 const url = `http://localhost:8080`;
@@ -18,44 +18,42 @@ const serverMsgParent = getEl(".server-message-parent");
 const serverText = getEl(".server-text");
 //class
 class Login {
-    constructor(username, password) {
-        this.username = username;
-        this.password = password
-    }
+  constructor(username, password) {
+    this.username = username;
+    this.password = password;
+  }
 }
 //fn
 const submitToServer = async (login) => {
-    try {
-        const { data } = await axios.post(`/auth/login`, login);
-        
-    
-    } catch (error) {
-        const {message}=error.response.data
-        return displayServerMessage(message)
-    }
-}
-const displayServerMessage = (message = "something went wrong!!! please try again") => {
+  try {
+    const { data } = await axios.post(`/auth/login`, login);
+    localStorage.setItem("user", data.token);
+    return (window.location.href = url);
+  } catch (error) {
+    const { message } = error.response.data;
+    return displayServerMessage(message);
+  }
+};
+const displayServerMessage = (
+  message = "something went wrong!!! please try again"
+) => {
+  serverMsgParent.classList.add("show-server-error");
 
-    serverMsgParent.classList.add("show-server-error");
-
-    serverText.textContent = message
-}
+  serverText.textContent = message;
+};
 const checkValidity = (inputs) => {
-    const isValid = inputs.every(input => input.reportValidity())
-    if (!isValid) return;
-    return submitToServer(new Login(inputs[0].value, inputs[1].value))
-}
-const serverMsg = () => {
-
-}
+  const isValid = inputs.every((input) => input.reportValidity());
+  if (!isValid) return;
+  return submitToServer(new Login(inputs[0].value, inputs[1].value));
+};
+const serverMsg = () => {};
 //event listener
 submitBtn.addEventListener("click", () => {
-
-    return checkValidity(inputs)
-})
+  return checkValidity(inputs);
+});
 cross.addEventListener("click", () => {
-    serverMsgParent.classList.remove("show-server-error");
-    serverText.textContent = "";
-    const passwordInput = inputs[1];
-    passwordInput.value = ""
-})
+  serverMsgParent.classList.remove("show-server-error");
+  serverText.textContent = "";
+  const passwordInput = inputs[1];
+  passwordInput.value = "";
+});
