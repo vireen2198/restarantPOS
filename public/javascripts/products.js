@@ -44,9 +44,7 @@ const displayDateTimeDay = () => {
 }
 
 setInterval(displayDateTimeDay, 1000)
-const reloadPage = () => {
-    return window.location.href = `${url}/products-page.html`
-}
+
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -57,7 +55,9 @@ const displayLoader = async () => {
     loaderParent.classList.remove("show-loader");
 
 }
-
+const redirectPage=(route)=>{
+    return window.location.href=`${url}/${route}`
+}
 const getProducts = async (value) => {
     try {
 
@@ -69,7 +69,8 @@ const getProducts = async (value) => {
         const { data } = await axios.post(`/products/getProducts`,{},{headers})
         return data
     } catch (error) {
-        console.log(error)
+        localStorage.removeItem("user");
+        return redirectPage("login.html")
     }
 }
 const displayAllProducts = async (value) => {
