@@ -4,6 +4,9 @@ const bcrypt = require('../config/bcrypt')
 module.exports = {
     login: async function (loginDto) {
         let localUser = await UserDao.findUser(loginDto)
+        if(localUser == null){
+            throw new Error("Unable to find user.")
+        } 
         let password = await bcrypt.comparePwd(loginDto.password , localUser.password)
         if (password == true) {
 
@@ -21,7 +24,7 @@ module.exports = {
             return returnobj;
         } 
         else {
-            throw new Error("Unable to find user.")
+            throw new Error("incorrect username or password.")
         }
     },
 }
