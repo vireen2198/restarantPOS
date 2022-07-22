@@ -69,7 +69,7 @@ const getProducts = async (value) => {
         const { data } = await axios.post(`/products/getProducts`,{},{headers})
         return data
     } catch (error) {
-        return reloadPage()
+        console.log(error)
     }
 }
 const displayAllProducts = async (value) => {
