@@ -26,16 +26,12 @@ class Login {
 //fn
 const submitToServer = async (login) => {
     try {
-        const { data } = await axios.post(`/auth/login`, { login });
-        console.log(data.response._id)
-        if (data.response._id != null || data.response._id != undefined) {
-            return window.location.href = `${url}/`
-        } else {
-            return window.location.href = `${url}/login.html`
-
-        }
+        const { data } = await axios.post(`/auth/login`, login);
+        
+    
     } catch (error) {
-        console.log(error.response)
+        const {message}=error.response.data
+        return displayServerMessage(message)
     }
 }
 const displayServerMessage = (message = "something went wrong!!! please try again") => {
