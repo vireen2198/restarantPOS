@@ -13,6 +13,15 @@ const url = `http://localhost:8080`;
 const addNewProductsPage = getEl("#add-new-product-btn");
 const searchInput = getEl("#search-products-box");
 const searchBox = getEl(".search-btn-parent");
+//token//headers
+const token=localStorage.getItem("user");
+if(!token){
+    localStorage.removeItem("user")
+    window.location.href=`${url}/login.html`
+}
+const headers={
+    Authorization:`Bearer ${token}`
+}
 //fn
 const displayDateTimeDay = () => {
     const dateTimeParent = getEl(".date-time-text")
@@ -54,10 +63,10 @@ const getProducts = async (value) => {
 
         const sortBy = getEl("#sort-by-products");
         if (value) {
-            const { data } = await axios.post(`/products/searchProducts?sort=${sortBy.value}`, { productName: value });
+            const { data } = await axios.post(`/products/searchProducts?sort=${sortBy.value}`, { productName: value },{headers});
             return data
         }
-        const { data } = await axios.post(`/products/getProducts`)
+        const { data } = await axios.post(`/products/getProducts`,{},{headers})
         return data
     } catch (error) {
         return reloadPage()
