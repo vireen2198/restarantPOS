@@ -13,6 +13,7 @@ const url = `http://localhost:8080`;
 const addNewProductsPage = getEl("#add-new-product-btn");
 const searchInput = getEl("#search-products-box");
 const searchBox = getEl(".search-btn-parent");
+const logOutBtn=getEl(".log-out-button")
 //token//headers
 const token=localStorage.getItem("user");
 if(!token){
@@ -94,7 +95,8 @@ const displayAllProducts = async (value) => {
             }
             const { productImageAddress, productPrice, productName, _id } = product;
             const div = createEl("div");
-            div.classList.add("single-product-container")
+            div.classList.add("single-product-container");
+            
             div.innerHTML = `
             <img src="${productImageAddress}" alt="" class="products-img">
             <div class="edit-delete-wrapper">
@@ -159,10 +161,14 @@ displayAllProducts()
 
 //event listener
 addNewProductsPage.addEventListener("click", () => {
-    return window.location.href = `${url}/add-edit-products.html`
+    return redirectPage("add-edit-products.html")
 })
 searchBox.addEventListener("click", () => {
     const checkInput = searchInput.reportValidity();
     if (!checkInput) return
     return displayAllProducts(searchInput.value)
+})
+logOutBtn.addEventListener("click",()=>{
+    localStorage.removeItem("user");
+    return redirectPage("login.html")
 })

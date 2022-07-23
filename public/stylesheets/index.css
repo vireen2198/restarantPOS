@@ -85,6 +85,7 @@ nav a ion-icon{
     text-shadow: 4px 3px 0px rgba(150, 150, 150, 0.78);
     text-transform: uppercase;
     font-weight: bold;
+    margin-right: .7vw;
 }
 .date-time-text{
     color:gray;
@@ -130,8 +131,6 @@ nav a ion-icon{
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-
-
 }
 .stats-header-parent ion-icon{
     font-size: 1.5vw;
@@ -194,4 +193,14 @@ nav a ion-icon{
 }
 #go-to-products-page:hover{
     background-color: rgb(188, 54, 170);
+}
+.log-out-button{
+    margin-right: auto;
+    font-size: 1.2vw;
+    color:whitesmoke;
+    font-weight: bold;
+    background-color: mediumvioletred;
+    padding:.3vw;
+    border-radius: .2vw;
+
 }

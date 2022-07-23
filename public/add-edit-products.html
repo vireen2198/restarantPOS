@@ -1,99 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./stylesheets/index.css">
-    <link rel="stylesheet" href="./stylesheets/add-edit-products.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./stylesheets/index.css" />
+    <link rel="stylesheet" href="./stylesheets/add-edit-products.css" />
     <title>Add/Edit Products</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="page-wrapper">
-        <nav>
-            <a href="http://" class="current-page-active">
-                <ion-icon name="home"></ion-icon>
-                home
-                
-            </a>
-            <a href="http://">
-                <ion-icon name="fast-food"></ion-icon> 
-                products
-            </a>
-            <a href="http://">
-                <ion-icon name="layers"></ion-icon>
-                
-                transactions
-            </a>
-            <a href="http://">
-                <ion-icon name="cash"></ion-icon>
-                cashier
-                
-            </a>
-            <a href="http://">
-                <ion-icon name="settings"></ion-icon>
-                settings
-            </a>
-        </nav>
-        <div class="content-wrapper">
-            <div class="greeting-time-container">
-                <p class="greeting-admin">welcome salman</p>
-                <p class="date-time-text">Mon, 17 july 2022 1843 hours</p>
-            </div>
-            <div class="current-page-add-new-wrapper">
-                <a class="current-page">add/edit products</a>
-                <input type="button" value="Back To Products" id="go-to-products-page">
-            </div>
-            <form class="new-products-wrapper">
-                <h3 class="add-new-product-header">Complete this form and you are all set</h3>
-                <p class="add-new-product-header">product image (required)</p>
-                <div class="image-input-container">
-                    <input type="file" name="" id="product-image-input" required accept="image/jpg,image/jpeg,image/png">
-                    <div class="input-file-cover" >
-                        <p>add image here...</p>
-                    </div>
-                </div>
-                <p class="add-new-product-header">product name (required)</p>
-                <div class="product-input-wrapper">
-                    <input type="text" name="" id="product-name-input" placeholder="product name required" required maxlength="50" minlength="4" autofocus>
-                </div>
-                <p class="add-new-product-header">product category (required)</p>
-                <div class="product-input-wrapper">
-                    <select name="" id="product-category-input" required>
-                        <option value="" disabled selected hidden> Please select category here</option>
-                        <option value="western"> western cuisine</option>
-                        <option value="arab"> arab cuisine</option>
-                        <option value="pakistani"> pakistani cuisine</option>
-                        <option value="local"> local cuisine</option>
-                        <option value="bites" >bites</option>
-                        <option value="beverage"> beverage</option>
-                        <option value="shisha"> shisha</option>
-                        
-                    </select>
-                </div>
-                <p class="add-new-product-header">product price (required)</p>
-                <div class="product-input-wrapper">
-                    <input type="number" name="" id="product-price-input" placeholder="product price required (RM)" required minlength="1" maxlength="3" pattern="[0-9]">
-                </div>
-                <p class="add-new-product-header">product description (optional)</p>
-                <div class="product-input-wrapper display-column">
-                    <textarea name="" id="product-desc-input" cols="30" rows="10" placeholder="say something about your products (optional)" maxlength="300"></textarea>
-                    <p class="characters-remaining">300 characters remaining</p>                    
-                </div>
-                <p class="server-msg">this one is error</p>
-                <div class="product-input-wrapper display-column">
-                    <input type="button" value="save product" id="submit-product">                
-                </div>
-                
-            </form>
-            
-            
+      <nav>
+        <a href="http://" class="current-page-active">
+          <ion-icon name="home"></ion-icon>
+          home
+        </a>
+        <a href="http://">
+          <ion-icon name="fast-food"></ion-icon>
+          products
+        </a>
+        <a href="http://">
+          <ion-icon name="layers"></ion-icon>
 
+          transactions
+        </a>
+        <a href="http://">
+          <ion-icon name="cash"></ion-icon>
+          cashier
+        </a>
+        <a href="http://">
+          <ion-icon name="settings"></ion-icon>
+          settings
+        </a>
+      </nav>
+      <div class="content-wrapper">
+        <div class="greeting-time-container">
+          <p class="greeting-admin">welcome salman</p>
+          <p class="date-time-text">Mon, 17 july 2022 1843 hours</p>
         </div>
+        <div class="current-page-add-new-wrapper">
+          <a class="current-page">add/edit products</a>
+          <input
+            type="button"
+            value="Back To Products"
+            id="go-to-products-page"
+          />
+        </div>
+        <form class="new-products-wrapper">
+          <h3 class="add-new-product-header">
+            Complete this form and you are all set
+          </h3>
+          <p class="add-new-product-header">product image (required)</p>
+          <div class="image-input-container">
+            <input
+              type="file"
+              name=""
+              id="product-image-input"
+              required
+              accept="image/jpg,image/jpeg,image/png"
+            />
+            <div class="input-file-cover">
+              <img alt="" src="" class="product-img-input-display" />
+              <div class="add-image-text-container">
+                <p class="add-image-text">add image here...</p>
+              </div>
+            </div>
+          </div>
+          <p class="add-new-product-header">product name (required)</p>
+          <div class="product-input-wrapper">
+            <input
+              type="text"
+              name=""
+              id="product-name-input"
+              placeholder="product name required"
+              required
+              maxlength="50"
+              minlength="4"
+              autofocus
+            />
+          </div>
+          <p class="add-new-product-header">product category (required)</p>
+          <div class="product-input-wrapper">
+            <select name="" id="product-category-input" required>
+              <option value="" disabled selected hidden>
+                Please select category here
+              </option>
+              <option value="western">western cuisine</option>
+              <option value="arab">arab cuisine</option>
+              <option value="pakistani">pakistani cuisine</option>
+              <option value="local">local cuisine</option>
+              <option value="bites">bites</option>
+              <option value="beverage">beverage</option>
+              <option value="shisha">shisha</option>
+            </select>
+          </div>
+          <p class="add-new-product-header">product price (required)</p>
+          <div class="product-input-wrapper">
+            <input
+              type="number"
+              name=""
+              id="product-price-input"
+              placeholder="product price required (RM)"
+              required
+              minlength="1"
+              maxlength="3"
+              pattern="[0-9]"
+            />
+          </div>
+          <p class="add-new-product-header">product description (optional)</p>
+          <div class="product-input-wrapper display-column">
+            <textarea
+              name=""
+              id="product-desc-input"
+              cols="30"
+              rows="10"
+              placeholder="say something about your products (optional)"
+              maxlength="300"
+            ></textarea>
+            <p class="characters-remaining">300 characters remaining</p>
+          </div>
+          <p class="server-msg">this one is error</p>
+          <div class="product-input-wrapper display-column">
+            <input type="button" value="save product" id="submit-product" />
+          </div>
+        </form>
+      </div>
     </div>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./javascripts/addEditProducts.js" defer></script>
-</body>
+  </body>
 </html>
