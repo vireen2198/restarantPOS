@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./stylesheets/index.css">
-    <link rel="stylesheet" href="./stylesheets/products-page.css">
+    <link rel="stylesheet" href="./stylesheets/single-table-order.css">
     <title>Products Page</title>
 </head>
 <body>
@@ -41,48 +41,21 @@
                 <p class="date-time-text">Mon, 17 july 2022 1843 hours</p>
             </div>
             <div class="current-page-add-new-wrapper">
-                <a class="current-page">products</a>
+                <a class="current-page">single table order</a>
                 <input type="button" value="Add New Product" id="add-new-product-btn">
             </div>
-            
-                <div class="products-header-sort-wrapper">
-                    <p class="sub-title">
-                        All Products
-                    </p>
-                    <form class="search-box-parent">
-                        <input type="search" name="" id="search-products-box" placeholder="Search Products Here ...">
-                        <div class="search-btn-parent">
-                            <ion-icon name="search"></ion-icon>
-                        </div>
-                    </form>
-                   
-                    <div class="select-container">
-                        <p>sort by</p>
-                        <select name="" id="sort-by-products">
-                            <option value="+date" selected>most recent</option>
-                            <option value="-date">most oldest</option>
-                            <option value="-productPrice">price: high to low</option>
-                            <option value="+productPrice">price: low to high</option>
-                            <option value="+productName">alphabetical: A-Z</option>
-                            <option value="-productName">alphabetical: Z-A</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="all-products-wrapper">
-
-                </div>
-        </div>        
-        <div class="loading-img-div">
-            <p>please wait patiently...</p>
-            <div class="loader">
-                
+            <div class="single-table-order-parent">
+                <h3 class="table-number-header">
+                    table number 1
+                </h3>
             </div>
-        </div>
+            
+
+        </div>        
     </div>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./javascripts/products.js" defer></script>
+    <script src="./javascripts/singleTableOrder.js" defer></script>
 </body>
 </html>

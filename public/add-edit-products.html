@@ -4,18 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./stylesheets/index.css" />
-    <link rel="stylesheet" href="./stylesheets/add-edit-products.css" />
+    <link rel="stylesheet" href="./stylesheets/index.css">
+    <link rel="stylesheet" href="./stylesheets/add-edit-products.css">
     <title>Add/Edit Products</title>
   </head>
   <body>
     <div class="page-wrapper">
       <nav>
-        <a href="http://" class="current-page-active">
+        <a href="./index.html" >
           <ion-icon name="home"></ion-icon>
           home
         </a>
-        <a href="http://">
+        <a href="./products-page.html" class="current-page-active">
           <ion-icon name="fast-food"></ion-icon>
           products
         </a>
@@ -24,7 +24,7 @@
 
           transactions
         </a>
-        <a href="http://">
+        <a href="./cashier.html">
           <ion-icon name="cash"></ion-icon>
           cashier
         </a>
@@ -36,8 +36,9 @@
       <div class="content-wrapper">
         <div class="greeting-time-container">
           <p class="greeting-admin">welcome salman</p>
+          <ion-icon name="power-sharp" class="log-out-button"></ion-icon>
           <p class="date-time-text">Mon, 17 july 2022 1843 hours</p>
-        </div>
+      </div>
         <div class="current-page-add-new-wrapper">
           <a class="current-page">add/edit products</a>
           <input
@@ -92,6 +93,17 @@
               <option value="bites">bites</option>
               <option value="beverage">beverage</option>
               <option value="shisha">shisha</option>
+            </select>
+          </div>
+          <p class="add-new-product-header">product size</p>
+          <div class="product-input-wrapper">
+            <select name="" id="product-size-input" required>
+              <option value="" selected >
+                no specific size (default)
+              </option>
+              <option value="s">small</option>
+              <option value="m">medium</option>
+              <option value="l">large</option>
             </select>
           </div>
           <p class="add-new-product-header">product price (required)</p>

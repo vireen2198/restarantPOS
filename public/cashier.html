@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./stylesheets/index.css">
+    <link rel="stylesheet" href="./stylesheets/cashier.css">
+    <title>cashier</title>
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <nav>
+        <a href="./index.html" >
+          <ion-icon name="home"></ion-icon>
+          home
+        </a>
+        <a href="./products-page.html" >
+          <ion-icon name="fast-food"></ion-icon>
+          products
+        </a>
+        <a href="">
+          <ion-icon name="layers"></ion-icon>
+
+          transactions
+        </a>
+        <a href="./cashier.html" class="current-page-active">
+          <ion-icon name="cash"></ion-icon>
+          cashier
+        </a>
+        <a href="http://">
+          <ion-icon name="settings"></ion-icon>
+          settings
+        </a>
+      </nav>
+      <div class="content-wrapper">
+        <div class="greeting-time-container">
+          <p class="greeting-admin">welcome salman</p>
+          <ion-icon name="power-sharp" class="log-out-button"></ion-icon>
+          <p class="date-time-text">Mon, 17 july 2022 1843 hours</p>
+      </div>
+        <div class="current-page-add-new-wrapper">
+          <a class="current-page">Cashier</a>
+          <input
+            type="button"
+            value="View All Tables"
+            id="go-to-products-page"
+          />
+        </div>
+       <div class="tables-display-wrapper">
+  
+       </div>
+      </div>
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./javascripts/cashier.js" defer></script>
+  </body>
+</html>

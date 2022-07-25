@@ -10,12 +10,15 @@ const productNameInput = getEl("#product-name-input");
 const productPriceInput = getEl("#product-price-input");
 const productDescInput = getEl("#product-desc-input");
 const productImageInput = getEl("#product-image-input");
+const productSizeInput = getEl("#product-size-input");
 const productImageCover = getEl(".product-img-input-display");
+
 const productCategoryInput = getEl("#product-category-input");
 const submitBtn = getEl("#submit-product");
 const backToProductsPage = getEl("#go-to-products-page");
 const toUpdateId = window.location.search.split("=")[1];
 const noImgCover = getEl(".add-image-text-container");
+const logOutBtn=getEl(".log-out-button")
 //token//headers
 const token = localStorage.getItem("user");
 if (!token) {
@@ -94,6 +97,7 @@ const serverMsg = (message, stat = true) => {
     serverText.classList.remove("server-err-msg");
   }, 3000);
 };
+
 const sendToServer = async () => {
   try {
     const checkImageFile = productImageInput.files[0];
@@ -103,7 +107,8 @@ const sendToServer = async () => {
       productPriceInput.value,
       productDescInput.value,
       "",
-      productCategoryInput.value
+      productCategoryInput.value,
+      productSizeInput.value
     );
     if (toUpdateId && checkImageFile) {
       image64Str = await getImage(productImageInput);
@@ -118,22 +123,25 @@ const sendToServer = async () => {
     }
 
     if (!toUpdateId) {
-      const { data } = await axios.post("/products/addProducts", newObj, {
-        headers,
-      });
-      const { message } = data;
-      return serverMsg(message);
+      const { data } = await axios.post(
+        "/products/addProducts",
+         newObj, 
+         {headers}
+      );
+
+      return serverMsg(data.message)
     } else {
       const { data } = await axios.post(
         "/products/editProducts",
         { _id: toUpdateId, ...newObj },
         { headers }
       );
-      const { message } = data;
-      return serverMsg(message);
+      return serverMsg(data.message);
     }
   } catch (error) {
+    console.log(error)
     const { message } = error.response.data;
+
     if (message) return serverMsg(message, false);
     return serverMsg("something went wrong!!! please try again later", false);
   }
@@ -164,24 +172,30 @@ const displayExistingProduct = async (_id) => {
     console.log(error.response);
   }
 };
+const redirectPage=(route)=>{
+  return window.location.href=`${url}/${route}`
+}
 if (toUpdateId) {
   displayExistingProduct(toUpdateId);
 
   noImgCover.classList.add("remove-white-bg");
 }
+//classes
 class Product {
   constructor(
     productName,
     productPrice,
     productDescription,
     productImageAddress,
-    productCategory
+    productCategory,
+    productSize
   ) {
     this.productName = productName;
     this.productPrice = productPrice;
     this.productDescription = productDescription;
     this.productImageAddress = productImageAddress;
     this.productCategory = productCategory;
+    this.productSize=productSize
   }
 }
 
@@ -229,3 +243,7 @@ productDescInput.addEventListener("keyup", () => {
 backToProductsPage.addEventListener("click", () => {
   return (window.location.href = `${url}/products-page.html`);
 });
+logOutBtn.addEventListener("click",()=>{
+  localStorage.removeItem("user");
+  return redirectPage("login.html")
+})

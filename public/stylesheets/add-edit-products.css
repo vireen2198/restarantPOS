@@ -88,7 +88,7 @@
   outline: none;
   border: 1px solid midnightblue;
 }
-#product-category-input {
+#product-category-input,#product-size-input {
   padding: 1vw;
   width: 100%;
   text-transform: capitalize;
@@ -131,7 +131,9 @@
 #product-desc-input:active,
 #product-desc-input:focus,
 #product-category-input:active,
-#product-category-input:focus {
+#product-category-input:focus,
+#product-size-input:active,
+#product-size-input:focus {
   border: 1px solid royalblue;
   outline: none;
 }

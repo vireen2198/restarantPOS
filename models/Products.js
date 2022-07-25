@@ -9,9 +9,9 @@ var ProductsSchema = new mongoose.Schema({
     productDescription: String,
     productCategory: String,
     productImageAddress: String,
+    productSize:String
 });
 
-ProductsSchema.index({ productName: 1}, { unique: true });
 
 ProductsSchema.plugin(aggregatePaginate);
 module.exports = db.model('Product', ProductsSchema);

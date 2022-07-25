@@ -93,7 +93,7 @@ const displayAllProducts = async (value) => {
                 const contentWrapper = getEl(".content-wrapper");
                 contentWrapper.removeChild(noContentWrapper)
             }
-            const { productImageAddress, productPrice, productName, _id } = product;
+            const { productImageAddress, productPrice, productName, _id ,productSize} = product;
             const div = createEl("div");
             div.classList.add("single-product-container");
             
@@ -104,12 +104,13 @@ const displayAllProducts = async (value) => {
                 <ion-icon name="trash" class="delete" id="delete-btn"></ion-icon>
             </div>
             <div class="item-desc-wrapper">
-                <p class="item-name">${productName}</p>
+                <p class="item-name">${productName} (${productSize})</p>
                 <p class="item-price">rm ${productPrice}</p>
             </div>
             `
             const deleteBtn = getEl("#delete-btn", div);
             const editBtn = getEl("#edit-btn", div);
+            
             deleteBtn.addEventListener("click", () => deleteProduct(_id));
             editBtn.addEventListener("click", () => editProduct(_id))
             allProductsParent.appendChild(div);
