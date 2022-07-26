@@ -108,16 +108,16 @@
           </div>
           <p class="add-new-product-header">product price (required)</p>
           <div class="product-input-wrapper">
-            <input
-              type="number"
-              name=""
-              id="product-price-input"
-              placeholder="product price required (RM)"
-              required
-              minlength="1"
-              maxlength="3"
-              pattern="[0-9]"
-            />
+            <input 
+            type="text" 
+            oninput="this.value = this.value.replace(/[^0-9\.]/g, '').split(/\./).slice(0, 3).join('.')" 
+            lang="en"
+            id="product-price-input"
+            placeholder="product price required (RM)"
+            required
+            minlength="1"
+            maxlength="5"
+            >
           </div>
           <p class="add-new-product-header">product description (optional)</p>
           <div class="product-input-wrapper display-column">

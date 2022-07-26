@@ -104,13 +104,17 @@ const displayAllProducts = async (value) => {
                 <ion-icon name="trash" class="delete" id="delete-btn"></ion-icon>
             </div>
             <div class="item-desc-wrapper">
-                <p class="item-name">${productName} (${productSize})</p>
-                <p class="item-price">rm ${productPrice}</p>
+                <p class="item-name">${productName}</p>
+                <p class="item-price">rm ${Number(productPrice).toFixed(2)}</p>
             </div>
             `
+           
             const deleteBtn = getEl("#delete-btn", div);
             const editBtn = getEl("#edit-btn", div);
-            
+            const itemName=getEl(".item-name",div);
+            if(productSize){
+                itemName.textContent = `${productName} (${productSize})`
+            }
             deleteBtn.addEventListener("click", () => deleteProduct(_id));
             editBtn.addEventListener("click", () => editProduct(_id))
             allProductsParent.appendChild(div);
