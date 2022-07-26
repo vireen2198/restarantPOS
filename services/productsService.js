@@ -6,8 +6,8 @@ module.exports = {
         return await productsDao.addProducts(params)
     },
 
-    async getProducts() {
-        return await productsDao.getProducts()
+    async getProducts(query) {
+        return await productsDao.getProducts(query)
     },
 
     async getProduct(params) {

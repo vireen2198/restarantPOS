@@ -67,7 +67,7 @@ const getProducts = async (value) => {
             const { data } = await axios.post(`/products/searchProducts?sort=${sortBy.value}`, { productName: value },{headers});
             return data
         }
-        const { data } = await axios.post(`/products/getProducts`,{},{headers})
+        const { data } = await axios.post(`/products/getProducts?sort=${sortBy.value}`,{},{headers})
         return data
     } catch (error) {
         localStorage.removeItem("user");

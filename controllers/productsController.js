@@ -19,7 +19,9 @@ module.exports = {
 
     async getProducts(req, res) {
         try {
-            let products = await productsService.getProducts()
+            const {sort}=req.query;
+            console.log(sort,req.query)
+            let products = await productsService.getProducts(sort)
             res.status(200).send({ products, message: 'Products retrieved successfully' })
         } catch (e) {
             res.status(400).send({ e: true, message: e.message });
@@ -55,7 +57,8 @@ module.exports = {
 
     async searchProducts(req, res) {
         try {
-            let products = await productsService.searchProducts(req.body);
+            const {sort}=req.query;
+            let products = await productsService.searchProducts(req.body,sort||"");
             res.status(200).send({ products, message: 'Product retrieved successfully' })
         } catch (e) {
             res.status(400).send({ e: true, message: e.message });

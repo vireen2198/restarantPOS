@@ -154,9 +154,10 @@ const displayEditExistingProducts = (object) => {
     productDescription,
     productCategory,
   } = object;
+  
   productImageCover.setAttribute("src", productImageAddress);
   productNameInput.value = productName;
-  productPriceInput.value = Number(productPrice);
+  productPriceInput.value = productPrice;
   productDescInput.value = productDescription;
   productCategoryInput.value = productCategory;
 };

@@ -7,8 +7,9 @@ module.exports = {
         return await Products.create(params)
     },
 
-    async getProducts() {
-        return await Products.find()
+    async getProducts(queries) {
+        
+        return await Products.find().sort(queries)
     },
 
     async getProduct(params) {
@@ -23,10 +24,10 @@ module.exports = {
         return await Products.findOneAndRemove({'_id' : params._id})
     },
 
-    async searchProducts(params) {
+    async searchProducts(params,queries) {
         return await Products.find(
             { $or: [ 
                { productName: { $regex: params.productName } }
-            ] })
+            ] }).sort("-productName")
     },
 }

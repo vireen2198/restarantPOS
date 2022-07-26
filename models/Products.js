@@ -10,7 +10,7 @@ var ProductsSchema = new mongoose.Schema({
     productCategory: String,
     productImageAddress: String,
     productSize:String
-});
+},{timestamps:true});
 
 
 ProductsSchema.plugin(aggregatePaginate);
