@@ -20,8 +20,7 @@ module.exports = {
     async getProducts(req, res) {
         try {
             const {sort}=req.query;
-            console.log(sort,req.query)
-            let products = await productsService.getProducts(sort)
+            let products = await productsService.getProducts(sort||"")
             res.status(200).send({ products, message: 'Products retrieved successfully' })
         } catch (e) {
             res.status(400).send({ e: true, message: e.message });
