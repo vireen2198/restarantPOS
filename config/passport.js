@@ -53,6 +53,7 @@ module.exports = function (passport) {
           let rUser = JSON.parse(JSON.stringify(user))
           rUser.password = undefined
           rUser.username = user.username
+          
           return done(null, rUser)
         }).catch(e => {
           return req.res.status(401).send({ error: true, message: "USER_NOT_FOUND" })

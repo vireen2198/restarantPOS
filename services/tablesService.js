@@ -1,19 +1,16 @@
-let {getTables:getTablesDao,registerTables:registerTablesDao} = require('../daos/tablesDao');
-const getTables=async()=>{
-    try {
-        return await getTablesDao()
-    } catch (error) {
-        return new Error(error)
-    }
-}
-const registerTables=async()=>{
-    try {
-        return await registerTablesDao(10)
-    } catch (error) {
-        return new Error(error)
-    }
-}
-module.exports = {
+let tablesDao = require('../daos/tablesDao');
 
-    getTables,registerTables
+module.exports = {
+    async getTables() {
+        return await tablesDao.getTables()
+    },
+
+    async getTable(params) {
+        return await tablesDao.getTable(params)
+    },
+    async registerTables(tables) {
+        let data = await tablesDao.registerTables(tables)
+        return data
+
+    }
 }
