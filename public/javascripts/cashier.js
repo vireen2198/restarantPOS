@@ -62,6 +62,14 @@ const tables=[
         tableBill:0.00
     },
 ]
+const fetchTables=async()=>{
+    try {
+        const {data}=await axios.get("/tables/getTables");
+        return data.tables
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 //fn
 const displayDateTimeDay = () => {
@@ -85,8 +93,10 @@ const displayDateTimeDay = () => {
 }
 
 setInterval(displayDateTimeDay, 1000)
-const displayTables=(tables)=>{
+const displayTables=async()=>{
     const tablesParent=getEl(".tables-display-wrapper");
+    const tables = await fetchTables();
+    if(!tables.length)return 
 
     tables.map((table=>{
         const div=createEl("div");
@@ -105,7 +115,7 @@ const displayTables=(tables)=>{
             tableBill.classList.add("table--not-occupied")
         }
         div.addEventListener("click",()=>{
-            return redirectPage(`single-table-order.html?tableNumber=${table.tableNumber}`)
+            return redirectPage(`single-table-order.html/:${table.tableNumber}`)
         })
         tablesParent.appendChild(div);
     }))

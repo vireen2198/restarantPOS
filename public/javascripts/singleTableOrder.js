@@ -10,9 +10,9 @@ const createEl = (elName) => {
 //variables
 const url = `http://localhost:8080`;
 const logOutBtn = getEl(".log-out-button");
-
 const searchInput = getEl("#search-product-input");
-
+const tableNumber=window.location.search.split("=")[1];
+console.log(tableNumber)
 //token//headers
 const token = localStorage.getItem("user");
 if (!token) {
@@ -71,6 +71,8 @@ setInterval(displayDateTimeDay, 1000);
 const redirectPage = (route) => {
   return (window.location.href = `${url}/${route}`);
 };
+
+//shop menu
 const getProducts = async () => {
   try {
     const { data } = await axios.post(
@@ -85,8 +87,6 @@ const getProducts = async () => {
     // return redirectPage("login.html")
   }
 };
-
-getProducts();
 const displayMenu = (
   array,
   message = "you do not have any items listed yet"
@@ -189,7 +189,6 @@ const displayMenu = (
     return displayControlledProducts(array);
   });
 };
-
 const searchProducts = async (value) => {
   try {
     const { data } = await axios.post(
@@ -206,7 +205,54 @@ const searchProducts = async (value) => {
     console.log(error);
   }
 };
-
+getProducts();
+//table current order
+const getTableCurrentOrder=async()=>{
+  try {
+      const {data}=await axios.get(`/tables/tableCurrentOrder/:${tableNumber}`);
+      console.log(data)
+  } catch (error) {
+    console.log(error)
+  }
+}
+const displayTableCurrentOrder=(array)=>{
+  const tableParent=document.querySelector(".current-order-container")
+  const tr=createEl("tr")
+  tableParent.innerHTML="";
+  tr.innerHTML=`
+    <th></th>
+    <th>item name</th>
+    <th>quantity</th>
+    <th>item total</th>
+    <th>remove</th>
+  `
+  tableParent.appendChild(tr)
+   if(!array.length) return 
+  array.map(prop=>{
+    const tr=createEl("tr");
+    tr.innerHTML=`
+      <td>
+        <img
+          src="./images/Table-Top-PNG-Image.png"
+          alt=""
+          srcset=""
+        />
+      </td>
+      <td>nasi goreng pataya</td>
+      <td>
+        <div class="modify-quantity">
+          <ion-icon name="remove-circle" class="minus"></ion-icon>
+          <span class="quantity">1</span>
+          <ion-icon name="add-circle" class="add"></ion-icon>
+        </div>
+      </td>
+      <td class="current-table-price-table">rm 20</td>
+      <td><ion-icon name="trash" class="trash"></ion-icon></td>
+    `
+    tableParent.appendChild(tr)
+  })
+}
+displayTableCurrentOrder([])
 //event listener
 logOutBtn.addEventListener("click", () => {
   localStorage.removeItem("user");

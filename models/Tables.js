@@ -6,15 +6,15 @@ var aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 var orderSchema = new mongoose.Schema(
   {
     productId: {
-      type: mongoose.Types.ObjectId,
-      ref: "products",
+      type: String,
       unique: true,
-      required: [true, "invalid product"],
+      required:true
     },
     productQuantity: {
       type: Number,
-      default: 1,
-    },
+      required:[true,"product quantity missing"]    
+    }
+
   },
   { timestamps: true }
 );
@@ -24,7 +24,26 @@ var TableSchema = new mongoose.Schema({
     unique: true,
     required:[true,"table number missing"]
   },
-  tableOrder: [orderSchema],
+  tableOrder:{
+    type:[
+      orderSchema
+    ],
+    default:undefined
+  },
+
+  tableStatus:{
+    type:String,
+    enum:{
+      values:["vacant","occupied"],
+      message:"invalid table status"
+    },
+    default:"vacant"
+  },
+  tableBill: {
+    type: Number,
+    default:0
+  }
+
 });
 
 TableSchema.plugin(aggregatePaginate);
