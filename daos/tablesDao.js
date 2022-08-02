@@ -1,28 +1,27 @@
 let Tables = require("../models/Tables");
-let Products=require("../models/Products")
+let Products = require("../models/Products");
 module.exports = {
   async addProductsToDbArray(table) {
-    const {productId}=table.add;
-    const getProduct=await Products.findOne({_id:productId});
-    if(!getProduct)return
-    const {productPrice}=getProduct
+    const { productId } = table.add;
+    const getProduct = await Products.findOne({ _id: productId });
+    if (!getProduct) return;
+    const { productPrice } = getProduct;
     let data = await Tables.findOneAndUpdate(
       { tableNumber: Number(table.tableNumber) },
       {
         $addToSet: {
           tableOrder: {
             productId,
-            productQuantity:1,
-            currentProductTotal:productPrice
+            productQuantity: 1,
+            currentProductTotal: productPrice,
           },
         },
       },
       { runValidators: true, new: true }
     );
-    await this.modifyTableTotalBill(table.tableNumber)
+    return this.modifyTableTotalBill(table.tableNumber);
   },
   async modifyQuantityItems(table) {
-
     await Tables.findOneAndUpdate(
       {
         tableNumber: Number(table.tableNumber),
@@ -31,25 +30,29 @@ module.exports = {
       {
         $set: {
           "tableOrder.$.productQuantity": Number(table.productQuantity),
-          "tableOrder.$.currentProductTotal": Number(table.productQuantity)*Number(table.productPrice),
+          "tableOrder.$.currentProductTotal":
+            Number(table.productQuantity) * Number(table.productPrice),
         },
       },
       { runValidators: true, new: true }
     );
-    await this.modifyTableTotalBill(table.tableNumber)
+    return this.modifyTableTotalBill(table.tableNumber);
   },
-  async modifyTableTotalBill(tableNumber){
-    const data=await Tables.findOne({tableNumber:Number(tableNumber)});
-    const tableBill=data.tableOrder.map(item=>item.currentProductTotal).reduce((a,b)=>a+b,0);
+  async modifyTableTotalBill(tableNumber) {
+    const data = await Tables.findOne({ tableNumber: Number(tableNumber) });
+    const tableBill = data.tableOrder
+      .map((item) => item.currentProductTotal)
+      .reduce((a, b) => a + b, 0);
     await Tables.findOneAndUpdate(
       {
         tableNumber: Number(tableNumber),
       },
       {
-        tableBill
+        tableBill,
       },
       { runValidators: true, new: true }
     );
+    return;
   },
   async getTables() {
     try {
@@ -84,7 +87,7 @@ module.exports = {
       }
     );
     let query = await Tables.aggregate(pipeline).allowDiskUse(true);
-    return query
+    return query;
   },
 
   async registerTables(numberOfTables) {
@@ -93,11 +96,27 @@ module.exports = {
     }
   },
   async tableCurrentOrder(table) {
-    let {tableOrder}= await Tables.findOne({
+    let data = await Tables.findOne({
       tableNumber: Number(table.tableNumber),
-    })
-    if(tableOrder)return tableOrder;
-    return []
+    }).select("tableBill tableOrder");
+    if (!data.tableOrder || !data.tableBill || !data.tableOrder.length)
+      return data;
+    const a = [];
+    for (let i = 0; i < data.tableOrder.length; i++) {
+      const { productId, productQuantity, currentProductTotal } =
+        data.tableOrder[i];
+      const data2 = await Products.findOne({ _id: productId });
+      const { productImageAddress, productName } = data2;
+      const newObj = {
+        productName,
+        productImageAddress,
+        productId,
+        productQuantity,
+        currentProductTotal,
+      };
+      a.push(newObj);
+    }
+    return a;
   },
 
   async addTableCurrentOrder(table) {
@@ -118,36 +137,36 @@ module.exports = {
     return;
   },
   async modifyTableCurrentOrderItemQuantity(table) {
-    let currentTable  = await Tables.findOne({
+    let currentTable = await Tables.findOne({
       tableNumber: Number(table.tableNumber),
     });
     let product = await Products.findOne({
       _id: table.productId,
     });
 
-    if(!currentTable || !product || !currentTable.tableOrder)return;
+    if (!currentTable || !product || !currentTable.tableOrder) return;
 
     let productQuantityToUpdate = currentTable.tableOrder.find(
       (item) => item.productId === table.productId
     );
-    if(!productQuantityToUpdate)return
+    if (!productQuantityToUpdate) return;
     switch (table.operator) {
       case "+":
         productQuantityToUpdate.productQuantity++;
         table.productQuantity = productQuantityToUpdate.productQuantity;
-        table.productPrice= product.productPrice
+        table.productPrice = product.productPrice;
         await this.modifyQuantityItems(table);
         break;
       case "-":
         if (productQuantityToUpdate.productQuantity > 1) {
           productQuantityToUpdate.productQuantity--;
           table.productQuantity = productQuantityToUpdate.productQuantity;
-          table.productPrice= product.productPrice
+          table.productPrice = product.productPrice;
           await this.modifyQuantityItems(table);
           break;
         }
         table.productQuantity = 1;
-        table.productPrice= product.productPrice
+        table.productPrice = product.productPrice;
         await this.modifyQuantityItems(table);
         break;
     }
@@ -155,14 +174,14 @@ module.exports = {
   async deleteSingleOrder(table) {
     let data = await Tables.findOneAndUpdate(
       {
-        "tableNumber": Number(table.tableNumber),
+        tableNumber: Number(table.tableNumber),
       },
       {
-        "$pull": {
-          "tableOrder": { "productId": table.productId },
+        $pull: {
+          tableOrder: { productId: table.productId },
         },
       }
     );
-    return this.modifyTableTotalBill(table.tableNumber)
+    return this.modifyTableTotalBill(table.tableNumber);
   },
 };
