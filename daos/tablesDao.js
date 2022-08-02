@@ -2,7 +2,7 @@ let Tables = require("../models/Tables");
 let Products = require("../models/Products");
 module.exports = {
   async addProductsToDbArray(table) {
-    const { productId } = table.add;
+    const { productId } = table;
     const getProduct = await Products.findOne({ _id: productId });
     if (!getProduct) return;
     const { productPrice } = getProduct;
@@ -116,7 +116,7 @@ module.exports = {
       };
       a.push(newObj);
     }
-    return a;
+    return { tableBill: data.tableBill, a };
   },
 
   async addTableCurrentOrder(table) {
@@ -128,7 +128,7 @@ module.exports = {
     }
     if (getTable.tableOrder) {
       let existingOrder = getTable.tableOrder.find(
-        (item) => item.productId === table.add.productId
+        (item) => item.productId === table.productId
       );
       if (!existingOrder) {
         await this.addProductsToDbArray(table);

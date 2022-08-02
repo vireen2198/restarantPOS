@@ -51,6 +51,7 @@
   font-size: 1.4vw;
   color: midnightblue;
   font-weight: bold;
+  cursor: pointer;
 }
 .menu-item-container img {
   width: 5vw;
@@ -72,6 +73,7 @@
 
 .current-order img {
   width: 5vw;
+  height:5vw
 }
 .products-menu {
   text-transform: uppercase;

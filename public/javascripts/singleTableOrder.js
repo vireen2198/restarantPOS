@@ -11,14 +11,17 @@ const createEl = (elName) => {
 const url = `http://localhost:8080`;
 const logOutBtn = getEl(".log-out-button");
 const searchInput = getEl("#search-product-input");
-const tableNumber=window.location.search.split("=")[1];
-
+const tableNumber = window.location.search.split("=")[1];
+const tableNumberParent = getEl(".table-number-header");
+const backBtn = getEl("#add-new-product-btn");
+tableNumberParent.textContent = `table number ${tableNumber}`;
 //token//headers
 const token = localStorage.getItem("user");
 if (!token || !tableNumber) {
   localStorage.removeItem("user");
   window.location.href = `${url}/login.html`;
 }
+
 const headers = {
   Authorization: `Bearer ${token}`,
 };
@@ -71,7 +74,10 @@ setInterval(displayDateTimeDay, 1000);
 const redirectPage = (route) => {
   return (window.location.href = `${url}/${route}`);
 };
-
+const loadPageError = () => {
+  localStorage.removeItem("user");
+  return redirectPage("login.html");
+};
 //shop menu
 const getProducts = async () => {
   try {
@@ -82,9 +88,7 @@ const getProducts = async () => {
     );
     return displayMenu(data.products);
   } catch (error) {
-    console.log(error);
-    // localStorage.removeItem("user");
-    // return redirectPage("login.html")
+    return loadPageError();
   }
 };
 const displayMenu = (
@@ -138,6 +142,9 @@ const displayMenu = (
           const menuItemName = getEl(".menu-item-name", div);
           menuItemName.textContent = `${product.productName} (${product.productSize})`;
         }
+        div.addEventListener("click", () => {
+          return addNewProductToCurrentOrder(product._id, tableNumber);
+        });
         menuParent.appendChild(div);
       });
       pagesNumberDisplay.textContent = `${currentPage}/${numberOfPages}`;
@@ -202,58 +209,117 @@ const searchProducts = async (value) => {
 
     return displayMenu(filteredItems, "no matching items found");
   } catch (error) {
-    console.log(error);
+    return loadPageError();
   }
 };
 getProducts();
 //table current order
-const getTableCurrentOrder=async()=>{
+const getTableCurrentOrder = async () => {
   try {
-      const {data}=await axios.get(`/tables/tableCurrentOrder/${tableNumber}`);
-      return displayTableCurrentOrder(data.orders)
+    const { data } = await axios.get(
+      `/tables/tableCurrentOrder/${tableNumber}`
+    );
+    const currentBillParent = getEl(".current-table-total");
+
+    currentBillParent.textContent = `RM ${Number(data.orders.tableBill).toFixed(
+      2
+    )}`;
+    return displayTableCurrentOrder(data.orders.a || []);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
-// getTableCurrentOrder()
-const displayTableCurrentOrder=(array)=>{
-  const tableParent=document.querySelector(".current-order-container")
-  const tr=createEl("tr")
-  tableParent.innerHTML="";
-  tr.innerHTML=`
+};
+getTableCurrentOrder();
+const displayTableCurrentOrder = (array) => {
+  const tableParent = document.querySelector(".current-order-container");
+  const tr = createEl("tr");
+  tableParent.innerHTML = "";
+  tr.innerHTML = `
     <th></th>
     <th>item name</th>
     <th>quantity</th>
     <th>item total</th>
     <th>remove</th>
-  `
-  tableParent.appendChild(tr)
-   if(!array.length) return 
-  array.map(prop=>{
-    const tr=createEl("tr");
-    tr.innerHTML=`
+  `;
+  tableParent.appendChild(tr);
+  if (!array.length) return;
+  array.map((prop) => {
+    const tr = createEl("tr");
+    tr.classList.add("current-order");
+    const {
+      productName,
+      productImageAddress,
+      productQuantity,
+      currentProductTotal,
+      productId,
+    } = prop;
+    tr.innerHTML = `
       <td>
         <img
-          src="./images/Table-Top-PNG-Image.png"
+          src="${productImageAddress}"
           alt=""
           srcset=""
         />
       </td>
-      <td>nasi goreng pataya</td>
+      <td>${productName}</td>
       <td>
         <div class="modify-quantity">
           <ion-icon name="remove-circle" class="minus"></ion-icon>
-          <span class="quantity">1</span>
+          <span class="quantity">${productQuantity}</span>
           <ion-icon name="add-circle" class="add"></ion-icon>
         </div>
       </td>
-      <td class="current-table-price-table">rm 20</td>
+      <td class="current-table-price-table">rm ${currentProductTotal.toFixed(
+        2
+      )}</td>
       <td><ion-icon name="trash" class="trash"></ion-icon></td>
-    `
-    tableParent.appendChild(tr)
-  })
-}
-
+    `;
+    const addBtn = getEl(".add", tr);
+    const minusBtn = getEl(".minus", tr);
+    const deleteBtn = getEl(".trash", tr);
+    addBtn.addEventListener("click", () => {
+      return modifyQuantity("+", productId, tableNumber);
+    });
+    minusBtn.addEventListener("click", () => {
+      return modifyQuantity("-", productId, tableNumber);
+    });
+    deleteBtn.addEventListener("click", () => {
+      return deleteItem(productId, tableNumber);
+    });
+    tableParent.appendChild(tr);
+  });
+};
+const modifyQuantity = async (operator, productId, tableNumber) => {
+  try {
+    await axios.post("/tables/modifyTableCurrentOrderItemQuantity", {
+      operator,
+      productId,
+      tableNumber,
+    });
+    return getTableCurrentOrder();
+  } catch (error) {
+    console.log(error);
+  }
+};
+const deleteItem = async (productId, tableNumber) => {
+  try {
+    await axios.post("/tables/deleteSingleOrder", { productId, tableNumber });
+    return getTableCurrentOrder();
+  } catch (error) {
+    console.log(error);
+  }
+};
+const addNewProductToCurrentOrder = async (productId, tableNumber) => {
+  try {
+    await axios.post("/tables/addTableCurrentOrder", {
+      productId,
+      tableNumber,
+    });
+    return getTableCurrentOrder();
+  } catch (error) {
+    console.log(error);
+  }
+};
 //event listener
 logOutBtn.addEventListener("click", () => {
   localStorage.removeItem("user");
@@ -262,4 +328,7 @@ logOutBtn.addEventListener("click", () => {
 
 searchInput.addEventListener("search", () => {
   return searchProducts(searchInput.value);
+});
+backBtn.addEventListener("click", () => {
+  return redirectPage("cashier.html");
 });
