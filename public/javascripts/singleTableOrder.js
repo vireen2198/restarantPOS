@@ -12,10 +12,10 @@ const url = `http://localhost:8080`;
 const logOutBtn = getEl(".log-out-button");
 const searchInput = getEl("#search-product-input");
 const tableNumber=window.location.search.split("=")[1];
-console.log(tableNumber)
+
 //token//headers
 const token = localStorage.getItem("user");
-if (!token) {
+if (!token || !tableNumber) {
   localStorage.removeItem("user");
   window.location.href = `${url}/login.html`;
 }
@@ -209,12 +209,13 @@ getProducts();
 //table current order
 const getTableCurrentOrder=async()=>{
   try {
-      const {data}=await axios.get(`/tables/tableCurrentOrder/:${tableNumber}`);
-      console.log(data)
+      const {data}=await axios.get(`/tables/tableCurrentOrder/${tableNumber}`);
+      return displayTableCurrentOrder(data.orders)
   } catch (error) {
     console.log(error)
   }
 }
+// getTableCurrentOrder()
 const displayTableCurrentOrder=(array)=>{
   const tableParent=document.querySelector(".current-order-container")
   const tr=createEl("tr")
@@ -252,7 +253,7 @@ const displayTableCurrentOrder=(array)=>{
     tableParent.appendChild(tr)
   })
 }
-displayTableCurrentOrder([])
+
 //event listener
 logOutBtn.addEventListener("click", () => {
   localStorage.removeItem("user");

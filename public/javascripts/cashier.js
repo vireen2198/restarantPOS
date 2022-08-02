@@ -115,7 +115,7 @@ const displayTables=async()=>{
             tableBill.classList.add("table--not-occupied")
         }
         div.addEventListener("click",()=>{
-            return redirectPage(`single-table-order.html/:${table.tableNumber}`)
+            return redirectPage(`single-table-order.html?tableNumber=${table.tableNumber}`)
         })
         tablesParent.appendChild(div);
     }))

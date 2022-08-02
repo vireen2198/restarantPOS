@@ -8,5 +8,5 @@ router.post("/registerTables", tablesController.registerTables);
 router.get("/tableCurrentOrder/:tableNumber",tablesController.tableCurrentOrder);
 router.post("/addTableCurrentOrder", tablesController.addTableCurrentOrder);
 router.post("/modifyTableCurrentOrderItemQuantity",tablesController.modifyTableCurrentOrderItemQuantity);
-
+router.delete("/deleteSingleOrder",tablesController.deleteSingleOrder);
 module.exports.router = router;

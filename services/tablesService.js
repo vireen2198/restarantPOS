@@ -24,4 +24,8 @@ module.exports = {
     let data = await tablesDao.modifyTableCurrentOrderItemQuantity(tableNumber);
     return data;
   },
+  async deleteSingleOrder(table) {
+    let data = await tablesDao.deleteSingleOrder(table);
+    return data;
+  },
 };

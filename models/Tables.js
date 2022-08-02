@@ -8,9 +8,13 @@ var orderSchema = new mongoose.Schema(
     productId: {
       type: String,
       unique: true,
-      required:true
+      required:[true,"product id missing"]
     },
     productQuantity: {
+      type: Number,
+      required:[true,"product quantity missing"]    
+    },
+    currentProductTotal:{
       type: Number,
       required:[true,"product quantity missing"]    
     }
