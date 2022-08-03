@@ -89,7 +89,6 @@ const getProducts = async () => {
     return displayMenu(data.products);
   } catch (error) {
     return loadPageError();
-
   }
 };
 const displayMenu = (
@@ -218,7 +217,8 @@ getProducts();
 const getTableCurrentOrder = async () => {
   try {
     const { data } = await axios.get(
-      `/tables/tableCurrentOrder/${tableNumber}`
+      `/tables/tableCurrentOrder/${tableNumber}`,
+      { headers }
     );
     const currentBillParent = getEl(".current-table-total");
 
@@ -292,11 +292,15 @@ const displayTableCurrentOrder = (array) => {
 };
 const modifyQuantity = async (operator, productId, tableNumber) => {
   try {
-    await axios.post("/tables/modifyTableCurrentOrderItemQuantity", {
-      operator,
-      productId,
-      tableNumber,
-    });
+    await axios.post(
+      "/tables/modifyTableCurrentOrderItemQuantity",
+      {
+        operator,
+        productId,
+        tableNumber,
+      },
+      { headers }
+    );
     return getTableCurrentOrder();
   } catch (error) {
     console.log(error);
@@ -304,7 +308,11 @@ const modifyQuantity = async (operator, productId, tableNumber) => {
 };
 const deleteItem = async (productId, tableNumber) => {
   try {
-    await axios.post("/tables/deleteSingleOrder", { productId, tableNumber });
+    await axios.post(
+      "/tables/deleteSingleOrder",
+      { productId, tableNumber },
+      { headers }
+    );
     return getTableCurrentOrder();
   } catch (error) {
     console.log(error);
@@ -312,10 +320,14 @@ const deleteItem = async (productId, tableNumber) => {
 };
 const addNewProductToCurrentOrder = async (productId, tableNumber) => {
   try {
-    await axios.post("/tables/addTableCurrentOrder", {
-      productId,
-      tableNumber,
-    });
+    await axios.post(
+      "/tables/addTableCurrentOrder",
+      {
+        productId,
+        tableNumber,
+      },
+      { headers }
+    );
     return getTableCurrentOrder();
   } catch (error) {
     console.log(error);

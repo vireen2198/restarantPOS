@@ -12,28 +12,10 @@ module.exports = {
         .status(200)
         .json({ tables, message: "tables retrieved successfully" });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          error,
-          message: "something went wrong!!! please try again later",
-        });
-    }
-  },
-
-  async getTable(req, res) {
-    try {
-      let table = await tableService.getTable(req.body);
-      return res
-        .status(200)
-        .json({ table, message: "table retrieved successfully" });
-    } catch (error) {
-      return res
-        .status(500)
-        .json({
-          error,
-          message: "something went wrong!!! please try again later",
-        });
+      return res.status(500).json({
+        error,
+        message: "something went wrong!!! please try again later",
+      });
     }
   },
 
@@ -54,12 +36,10 @@ module.exports = {
         .status(200)
         .json({ orders, message: "tables retrieved successfully" });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          error,
-          message: "something went wrong!!! please try again later",
-        });
+      return res.status(500).json({
+        error,
+        message: "something went wrong!!! please try again later",
+      });
     }
   },
 
@@ -71,12 +51,10 @@ module.exports = {
         .status(200)
         .json({ orders, message: "tables retrieved successfully" });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          error,
-          message: "something went wrong!!! please try again later",
-        });
+      return res.status(500).json({
+        error,
+        message: "something went wrong!!! please try again later",
+      });
     }
   },
 
@@ -89,12 +67,10 @@ module.exports = {
         .status(200)
         .json({ orders, message: "tables retrieved successfully" });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          error,
-          message: "something went wrong!!! please try again later",
-        });
+      return res.status(500).json({
+        error,
+        message: "something went wrong!!! please try again later",
+      });
     }
   },
   async deleteSingleOrder(req, res) {
@@ -102,12 +78,10 @@ module.exports = {
       let orders = await tableService.deleteSingleOrder(req.body);
       return res.status(200).json({ message: "tables deleted successfully" });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          error,
-          message: "something went wrong!!! please try again later",
-        });
+      return res.status(500).json({
+        error,
+        message: "something went wrong!!! please try again later",
+      });
     }
   },
 };

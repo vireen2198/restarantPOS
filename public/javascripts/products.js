@@ -134,8 +134,8 @@ const displayAllProducts = async (value) => {
 const deleteProduct = async (_id) => {
     try {
 
-        const { data } = await axios.post("/products/deleteProducts", { _id });
-        displayAllProducts()
+        const { data } = await axios.post("/products/deleteProducts", { _id },{headers});
+        return displayAllProducts()
 
     } catch (error) {
         console.log(error)

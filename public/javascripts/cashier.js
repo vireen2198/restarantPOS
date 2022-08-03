@@ -20,56 +20,6 @@ if (!token) {
 const headers = {
   Authorization: `Bearer ${token}`,
 };
-const tables = [
-  {
-    tableNumber: 1,
-    tableStatus: "ordered",
-    tableBill: 24.99,
-  },
-  {
-    tableNumber: 2,
-    tableStatus: "ordered",
-    tableBill: 100.0,
-  },
-  {
-    tableNumber: 3,
-    tableStatus: "ordered",
-    tableBill: 0.3,
-  },
-  {
-    tableNumber: 4,
-    tableStatus: "vacant",
-    tableBill: 0.0,
-  },
-  {
-    tableNumber: 5,
-    tableStatus: "ordered",
-    tableBill: 24.99,
-  },
-  {
-    tableNumber: 6,
-    tableStatus: "ordered",
-    tableBill: 100.0,
-  },
-  {
-    tableNumber: 7,
-    tableStatus: "ordered",
-    tableBill: 0.3,
-  },
-  {
-    tableNumber: 8,
-    tableStatus: "vacant",
-    tableBill: 0.0,
-  },
-];
-const fetchTables = async () => {
-  try {
-    const { data } = await axios.get("/tables/getTables", { headers });
-    return data.tables;
-  } catch (error) {
-    return loadPageError();
-  }
-};
 
 //fn
 const displayDateTimeDay = () => {
@@ -114,7 +64,21 @@ const displayDateTimeDay = () => {
     monthArray[month]
   } ${year}, ${a.toString().split(" ")[4]} ${morningEvening}`;
 };
-
+const redirectPage = (route) => {
+  return (window.location.href = `${url}/${route}`);
+};
+const loadPageError = () => {
+  localStorage.removeItem("user");
+  return redirectPage("login.html");
+};
+const fetchTables = async () => {
+  try {
+    const { data } = await axios.get("/tables/getTables", { headers });
+    return data.tables;
+  } catch (error) {
+    return loadPageError();
+  }
+};
 setInterval(displayDateTimeDay, 1000);
 const displayTables = async () => {
   const tablesParent = getEl(".tables-display-wrapper");
@@ -144,14 +108,7 @@ const displayTables = async () => {
     tablesParent.appendChild(div);
   });
 };
-displayTables(tables);
-const redirectPage = (route) => {
-  return (window.location.href = `${url}/${route}`);
-};
-const loadPageError = () => {
-  localStorage.removeItem("user");
-  return redirectPage("login.html");
-};
+displayTables();
 
 //event listener
 logOutBtn.addEventListener("click", () => {

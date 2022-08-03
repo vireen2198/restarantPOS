@@ -63,33 +63,6 @@ module.exports = {
     }
   },
 
-  async getTable(params) {
-    // let tables = await Tables.find({"tableNumber" : params.tableNumber});
-    // return tables
-    let pipeline = [];
-    pipeline.push(
-      {
-        $match: {
-          tableNumber: Number(params.tableNumber),
-        },
-      },
-      {
-        $unwind: {
-          path: "$tableOrder",
-        },
-      },
-      {
-        $project: {
-          tableNumber: "$tableNumber",
-          productQuantity: "$tableOrder.quantity",
-          productId: "$tableOrder.productId",
-        },
-      }
-    );
-    let query = await Tables.aggregate(pipeline).allowDiskUse(true);
-    return query;
-  },
-
   async registerTables(numberOfTables) {
     for (let i = 1; i <= Number(numberOfTables.tables); i++) {
       let tables = await Tables.create({ tableNumber: i });

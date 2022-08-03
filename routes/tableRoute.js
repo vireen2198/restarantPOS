@@ -1,12 +1,32 @@
 var express = require("express");
 var router = express.Router();
 var tablesController = require("../controllers/tablesController");
-
-router.get("/getTables", tablesController.getTables);
-router.get("/getTable", tablesController.getTable);
+var passport = require("passport");
+require("../config/passport")(passport);
+router.get(
+  "/getTables",
+  passport.authenticate("user-rule", { session: false }),
+  tablesController.getTables
+);
 router.post("/registerTables", tablesController.registerTables);
-router.get("/tableCurrentOrder/:tableNumber",tablesController.tableCurrentOrder);
-router.post("/addTableCurrentOrder", tablesController.addTableCurrentOrder);
-router.post("/modifyTableCurrentOrderItemQuantity",tablesController.modifyTableCurrentOrderItemQuantity);
-router.post("/deleteSingleOrder",tablesController.deleteSingleOrder);
+router.get(
+  "/tableCurrentOrder/:tableNumber",
+  passport.authenticate("user-rule", { session: false }),
+  tablesController.tableCurrentOrder
+);
+router.post(
+  "/addTableCurrentOrder",
+  passport.authenticate("user-rule", { session: false }),
+  tablesController.addTableCurrentOrder
+);
+router.post(
+  "/modifyTableCurrentOrderItemQuantity",
+  passport.authenticate("user-rule", { session: false }),
+  tablesController.modifyTableCurrentOrderItemQuantity
+);
+router.post(
+  "/deleteSingleOrder",
+  passport.authenticate("user-rule", { session: false }),
+  tablesController.deleteSingleOrder
+);
 module.exports.router = router;
