@@ -10,7 +10,7 @@ router.post('/getProducts', passport.authenticate('user-rule', { session: false 
 router.post('/getProduct', productsController.getProduct);
 router.post('/editProducts', productsController.editProducts);
 router.post('/deleteProducts', productsController.deleteProducts);
-router.post('/searchProducts', productsController.searchProducts);
+router.post('/getMenuProducts', productsController.getMenuProducts);
 
 
 module.exports.router = router;

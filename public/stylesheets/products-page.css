@@ -196,6 +196,23 @@ transition:.3s ease-in-out
     opacity: 1;
     z-index: 999;
 }
+.pagination-button-container{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:1vw;
+    font-size: 1.3vw;
+    border-radius: .3vw;
+    border: .3vw solid royalblue;
+    margin-top: 1vw;
+    background-color:#f3f3f3
+}
+.pagination-button-container ion-icon{
+    color:royalblue;
+    font-weight: bold;
+    font-size: 2vw;
+}
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }

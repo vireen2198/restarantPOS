@@ -9,7 +9,9 @@ module.exports = {
     async getProducts(query) {
         return await productsDao.getProducts(query)
     },
-
+    async getMenuProducts(query) {
+        return await productsDao.getMenuProducts(query)
+    },
     async getProduct(params) {
         return await productsDao.getProduct(params)
     },
@@ -22,7 +24,4 @@ module.exports = {
         return await productsDao.deleteProducts(params)
     },
 
-    async searchProducts(params) {
-        return await productsDao.searchProducts(params)
-    },
 }

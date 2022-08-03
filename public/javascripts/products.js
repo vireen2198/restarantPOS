@@ -13,7 +13,11 @@ const url = `http://localhost:8080`;
 const addNewProductsPage = getEl("#add-new-product-btn");
 const searchInput = getEl("#search-products-box");
 const searchBox = getEl(".search-btn-parent");
-const logOutBtn=getEl(".log-out-button")
+const logOutBtn=getEl(".log-out-button");
+const nextPageBtn=getEl(".next-Btn");
+const backPageBtn=getEl(".back-Btn");
+let currentPage=1;
+const paginationPagesTextParent=getEl(".number-of-page-current-page")
 //token//headers
 const token=localStorage.getItem("user");
 if(!token){
@@ -59,15 +63,12 @@ const displayLoader = async () => {
 const redirectPage=(route)=>{
     return window.location.href=`${url}/${route}`
 }
-const getProducts = async (value) => {
+const getProducts = async (value="") => {
     try {
 
         const sortBy = getEl("#sort-by-products");
-        if (value) {
-            const { data } = await axios.post(`/products/searchProducts?sort=${sortBy.value}`, { productName: value },{headers});
-            return data
-        }
-        const { data } = await axios.post(`/products/getProducts?sort=${sortBy.value}`,{},{headers})
+
+const { data } = await axios.post(`/products/getProducts?sort=${sortBy.value}&page=${currentPage}&productName=${value}`,{},{headers})
         return data
     } catch (error) {
         localStorage.removeItem("user");
@@ -77,16 +78,20 @@ const getProducts = async (value) => {
 const displayAllProducts = async (value) => {
     try {
         await displayLoader()
-        const { products } = await getProducts(value);
+        
+        const data = await getProducts(value);
+        const {products,totalPages}=data.products
         const allProductsParent = getEl(".all-products-wrapper");
         const deleteUnwantedProducts = getAllEl(".single-product-container");
+        const paginationPagesTextParent=getEl(".number-of-page-current-page")
         if (deleteUnwantedProducts.length) {
             deleteUnwantedProducts.forEach((unwanted) => {
                 allProductsParent.removeChild(unwanted)
             })
         }
         if (!products.length && value) return displayNoProducts(hasValue = true)
-        if (!products.length) return displayNoProducts()
+        if (!products.length) return displayNoProducts();
+        paginationPagesTextParent.textContent=`${currentPage}/${totalPages}`
         products.map((product, i) => {
             const noContentWrapper = getEl(".no-content-parent");
             if (noContentWrapper) {
@@ -119,7 +124,7 @@ const displayAllProducts = async (value) => {
             editBtn.addEventListener("click", () => editProduct(_id))
             allProductsParent.appendChild(div);
 
-        })
+        });
 
     } catch (error) {
         console.log(error)
@@ -161,7 +166,26 @@ const displayNoProducts = (hasValue = false) => {
     }
     contentWrapper.appendChild(div)
 }
+const changePage=async(operator)=>{
+    const totalPages=Number(paginationPagesTextParent.textContent.split("/")[1]);
 
+    switch(operator){
+        case "+":
+            if(currentPage<totalPages){
+                currentPage++;
+                await displayAllProducts(searchInput.value)
+                break
+            }
+        case "-":
+            if(currentPage>1){
+                currentPage--;
+                await displayAllProducts(searchInput.value)
+                break
+            }
+            
+
+    }
+}
 displayAllProducts()
 
 //event listener
@@ -173,7 +197,12 @@ searchBox.addEventListener("click", () => {
     if (!checkInput) return
     return displayAllProducts(searchInput.value)
 })
+searchInput.addEventListener("click", () => {
+    currentPage=1
+})
 logOutBtn.addEventListener("click",()=>{
     localStorage.removeItem("user");
     return redirectPage("login.html")
 })
+nextPageBtn.addEventListener("click",()=>changePage("+"));
+backPageBtn.addEventListener("click",()=>changePage("-"))

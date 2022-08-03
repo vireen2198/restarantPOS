@@ -82,13 +82,14 @@ const loadPageError = () => {
 const getProducts = async () => {
   try {
     const { data } = await axios.post(
-      `/products/getProducts?sort=productCategory`,
+      `/products/getMenuProducts?sort=productCategory`,
       {},
       { headers }
     );
     return displayMenu(data.products);
   } catch (error) {
     return loadPageError();
+
   }
 };
 const displayMenu = (
@@ -199,7 +200,7 @@ const displayMenu = (
 const searchProducts = async (value) => {
   try {
     const { data } = await axios.post(
-      `/products/getProducts?sort=productCategory`,
+      `/products/getMenuProducts?sort=productCategory`,
       {},
       { headers }
     );

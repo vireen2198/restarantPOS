@@ -19,14 +19,20 @@ module.exports = {
 
     async getProducts(req, res) {
         try {
-            const {sort}=req.query;
-            let products = await productsService.getProducts(sort||"")
+            let products = await productsService.getProducts(req.query)
             res.status(200).send({ products, message: 'Products retrieved successfully' })
         } catch (e) {
             res.status(400).send({ e: true, message: e.message });
         }
     },
-
+    async getMenuProducts(req, res) {
+        try {
+            let products = await productsService.getMenuProducts(req.query)
+            res.status(200).send({ products, message: 'Products retrieved successfully' })
+        } catch (e) {
+            res.status(400).send({ e: true, message: e.message });
+        }
+    },
     async getProduct(req, res) {
         try {
             let product = await productsService.getProduct(req.body)
@@ -35,6 +41,7 @@ module.exports = {
             res.status(400).send({ e: true, message: e.message });
         }
     },
+    
 
     async editProducts(req, res) {
         try {
@@ -54,13 +61,4 @@ module.exports = {
         }
     },
 
-    async searchProducts(req, res) {
-        try {
-            const {sort}=req.query;
-            let products = await productsService.searchProducts(req.body,sort||"");
-            res.status(200).send({ products, message: 'Product retrieved successfully' })
-        } catch (e) {
-            res.status(400).send({ e: true, message: e.message });
-        }
-    },
 }
