@@ -1,21 +1,44 @@
 'use strict';
 var mongoose = require('mongoose');
 var db = require('../db');
-
+const bcrypt=require("../config/bcrypt")
 var UserSchema = new mongoose.Schema({
-  username: String,
-  email: String,
-  password: String,
-  mobileNumber: String,
-  created_at: { type: Date, default: Date.now },
-  updated_at: { type: Date, default: Date.now },
-  created_by: String,
-  updated_by: String,
+  username: {
+    type:String,
+    unique:true,
+    match:[/^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,16}$/,"invalid username format"]
+  },
+  email:{
+    type:String,
+    unique:true
+  },
+  password:{
+    type:String,
+  },
+  userMobileNumber:{
+    type:String,
+    default:"",
+    match:[/^(\+?6?01)[02-46-9]-*[0-9]{7}$|^(\+?6?01)[1]-*[0-9]{8}$/,"invalid phone number"]
+  },
   dummy: Boolean,
   loggedIn: String,
-  isAdmin: Boolean,
-  lastLogin: { type: Date, default: Date.now }
-});
+  isAdmin: {
+    type:Boolean,
+    default:false,
+    required:[true,"please provide user type"]
+  },
+  lastLogin: { type: Date, default: Date.now },
+},{timestamps:true});
 
-UserSchema.index({ username: 1, email: 1 }, { unique: true });
+UserSchema.pre('save', async function(next) {
+  try {
+    const passwordRegex=/^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,16}$/
+    if(!passwordRegex.test(this.password))throw new Error("invalid password format");
+    const hashedPwd=await bcrypt.newPwdHash(this.password);
+    this.password=hashedPwd;
+    next()
+  } catch (error) {
+    throw new Error(error.message)
+  }
+});
 module.exports = db.model('User', UserSchema);

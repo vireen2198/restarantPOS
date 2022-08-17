@@ -3,7 +3,7 @@ const bcrypt = require('../config/bcrypt')
 
 module.exports = {
     login: async function (loginDto) {
-        let localUser = await UserDao.findUser(loginDto)
+        let localUser = await UserDao.findUser(loginDto);
         if(localUser == null){
             throw new Error("Unable to find user.")
         } 
@@ -12,7 +12,6 @@ module.exports = {
 
             let user = {
                 '_id' : localUser._id.toString().replace(/ObjectId\("(.*)"\)/, "$1"),
-                'updated_at' : new Date(),
                 'loggedIn' : 'true',
                 'lastLogin' : new Date(),
 

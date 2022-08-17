@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./images/th.jpg" />
+    <link rel="stylesheet" href="./stylesheets/index.css" />
+    <link rel="stylesheet" href="./stylesheets/settings.css" />
+    <link rel="stylesheet" href="./stylesheets/server-msg.css" />
+    <title>settings</title>
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <nav>
+        <a href="./index.html">
+          <ion-icon name="home"></ion-icon>
+          home
+        </a>
+        <a href="./products-page.html">
+          <ion-icon name="fast-food"></ion-icon>
+          products
+        </a>
+        <a href="">
+          <ion-icon name="layers"></ion-icon>
+
+          transactions
+        </a>
+        <a href="./cashier.html">
+          <ion-icon name="cash"></ion-icon>
+          cashier
+        </a>
+        <a href="./settings.html" class="current-page-active">
+          <ion-icon name="settings"></ion-icon>
+          settings
+        </a>
+      </nav>
+      <div class="content-wrapper">
+        <div class="greeting-time-container">
+          <p class="greeting-admin"></p>
+          <ion-icon name="power-sharp" class="log-out-button"></ion-icon>
+          <p class="date-time-text"></p>
+        </div>
+        <div class="current-page-add-new-wrapper">
+          <a class="current-page">Settings</a>
+          <input type="button" value="Home" id="go-to-products-page" />
+        </div>
+        <div class="current-page-active-wrapper">
+          <div class="current-page-active-container current-page-is-active">
+            <ion-icon name="business"></ion-icon>
+            <p class="current-page-active-header">Business</p>
+          </div>
+          <hr class="current-line-not-active" />
+          <div class="current-page-active-container">
+            <ion-icon name="person"></ion-icon>
+            <p class="current-page-active-header">User</p>
+          </div>
+          <hr class="current-line-not-active" />
+          <div class="current-page-active-container">
+            <ion-icon name="people"></ion-icon>
+            <p class="current-page-active-header">Workers</p>
+          </div>
+        </div>
+        <div class="form-wrapper">
+          <form class="settings-wrapper form-1 current-active-form-showing">
+            <p class="setting-header">edit your settings here (admin only)</p>
+            <div class="question-input-wrapper">
+              <p class="question-header">business name</p>
+              <input
+                type="text"
+                name=""
+                id="business-name-input"
+                placeholder="e.g: AL BADAR RESTAURANT"
+                pattern="^[a-zA-Z\s]*$"
+                minlength="5"
+                maxlength="40"
+                required
+              />
+            </div>
+            <p class="setting-header">Business Address</p>
+            <div class="question-input-wrapper">
+              <p class="question-header">address line 1</p>
+              <input
+                type="text"
+                name=""
+                id="address-line-1-input"
+                placeholder="e.g: 174, JALAN KEKWA 4"
+                pattern="^[a-zA-Z0-9\s,'-]*$"
+                required
+              />
+            </div>
+            <div class="question-input-wrapper">
+              <p class="question-header">address line 2 (optional)</p>
+              <input
+                type="text"
+                name=""
+                id="address-line-2-input"
+                placeholder="e.g: TAMAN KEKWA"
+                pattern="^[a-zA-Z0-9\s]*$"
+              />
+            </div>
+            <div class="question-input-wrapper">
+              <p class="question-header">postcode</p>
+              <input
+                type="text"
+                name=""
+                id="address-postcode-input"
+                placeholder="e.g: 70100"
+                minlength="5"
+                maxlength="5"
+                pattern="^[0-9]*$"
+                required
+              />
+            </div>
+            <div class="question-input-wrapper">
+              <p class="question-header">country</p>
+              <select name="" id="country-select" required>
+                <option value="malaysia" selected disabled>Malaysia</option>
+              </select>
+            </div>
+            <div class="question-input-wrapper">
+              <p class="question-header">state</p>
+              <select name="" id="state-select" required></select>
+            </div>
+            <div class="question-input-wrapper">
+              <p class="question-header">county</p>
+              <select name="" id="county-select" required></select>
+            </div>
+            <p class="setting-header">additional charges</p>
+            <div class="question-input-wrapper">
+              <p class="question-header">service charges</p>
+              <input
+                type="text"
+                name=""
+                id="business-service-charges-input"
+                placeholder="e.g: 20%"
+                maxlength="2"
+                pattern="\d+"
+                required
+              />
+            </div>
+            <div class="question-input-wrapper">
+              <p class="question-header">taxes</p>
+              <input
+                type="text"
+                name=""
+                id="business-tax-input"
+                placeholder="e.g: 3%"
+                maxlength="2"
+                pattern="\d+"
+                required
+              />
+            </div>
+            <p class="setting-header">Business contact details</p>
+            <div class="question-input-wrapper">
+              <p class="question-header">mobile number</p>
+              <input
+                type="tel"
+                name=""
+                id="business-contact-input"
+                placeholder="e.g: 0123113015"
+                pattern="^(01)[02-46-9]-*[0-9]{7}$|^(\+?6?01)[1]-*[0-9]{8}$"
+                required
+              />
+            </div>
+            <div class="question-input-wrapper">
+              <p class="question-header">email</p>
+              <input
+                type="email"
+                name=""
+                id="business-email-input"
+                placeholder="e.g: 24salman@gmail.com"
+                required
+              />
+            </div>
+            <div class="question-input-wrapper">
+              <input type="button" value="next page" class="next-page-btn" />
+              <input
+                type="button"
+                value="submit"
+                class="submit-next-page-btn"
+              />
+            </div>
+          </form>
+          <form class="settings-wrapper form-2">
+            <p class="setting-header">edit your settings here</p>
+            <p class="back-page-link">
+              <ion-icon name="chevron-back"></ion-icon> Back to business
+              settings
+            </p>
+            <div class="question-input-wrapper">
+              <p class="question-header">user name</p>
+              <input
+                type="text"
+                name=""
+                id="username-input"
+                placeholder="e.g: salman12"
+                pattern="^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,16}$"
+                minlength="4"
+                maxlength="15"
+              />
+            </div>
+            <div class="question-input-wrapper">
+              <p class="question-header">email address</p>
+              <input
+                type="email"
+                name=""
+                id="email-address-input"
+                placeholder="e.g: salman@gmail.com"
+              />
+            </div>
+            <!-- <div class="question-input-wrapper">
+                    <p class="question-header">password</p>
+                    <input type="password" name="" id="" placeholder="e.g: appleTango20@">
+                </div> -->
+            <div class="question-input-wrapper">
+              <p class="question-header">mobile number</p>
+              <div class="tel-input-verify-wrapper">
+                <input
+                  type="tel"
+                  name=""
+                  id="user-mobile-number-input"
+                  placeholder="e.g: 0123113015"
+                  pattern="^(01)[02-46-9]-*[0-9]{7}$|^(\+?6?01)[1]-*[0-9]{8}$"
+                  required
+                />
+                <button class="verify-phone-input">verify</button>
+              </div>
+            </div>
+            <div class="question-input-wrapper">
+              <input type="button" value="next page" class="next-page-btn" />
+              <input
+                type="button"
+                value="submit"
+                class="submit-next-page-btn"
+              />
+            </div>
+          </form>
+          <form class="settings-wrapper form-3">
+            <p class="setting-header">edit your settings here</p>
+            <p class="back-page-link">
+              <ion-icon name="chevron-back"></ion-icon> Back to user settings
+            </p>
+            <p class="setting-header">
+              add/delete current workers (admin only)
+            </p>
+
+            <!-- <div class="current-worker-container">
+                    <p class="worker-name">salman <span class="worker-is-admin">(admin)</span></p>
+                    <div class="edit-delete-container">
+                        <ion-icon name="create" class="edit-worker"></ion-icon>
+                        <ion-icon name="trash" class="trash"></ion-icon>
+                    </div>
+                    
+                </div>
+                <div class="current-worker-container">
+                    <p class="worker-name">salman <span class="worker-is-admin">(admin)</span></p>
+                    <div class="edit-delete-container">
+                        <ion-icon name="create" class="edit-worker"></ion-icon>
+                        <ion-icon name="trash" class="trash"></ion-icon>
+                    </div>
+                    
+                </div>
+                <div class="current-worker-container">
+                    <p class="worker-name">salman <span class="worker-is-admin">(admin)</span></p>
+                    <div class="edit-delete-container">
+                        <ion-icon name="create" class="edit-worker"></ion-icon>
+                        <ion-icon name="trash" class="trash"></ion-icon>
+                    </div>
+                    
+                </div> -->
+            <div class="question-input-wrapper">
+              <input
+                type="button"
+                value="Add New Worker"
+                class="submit-next-page-btn"
+              />
+            </div>
+          </form>
+          <div class="TAC-wrapper">
+            <div class="close-TAC-container">
+              <ion-icon name="close-outline"></ion-icon>
+            </div>
+            <div class="display-TAC-wrapper">
+              <div class="tac-header">please enter your 6 digits code</div>
+              <div class="digits-wrapper">
+                <p class="digits">_</p>
+                <p class="digits">_</p>
+                <p class="digits">_</p>
+                <p class="digits">_</p>
+                <p class="digits">_</p>
+                <p class="digits">_</p>
+              </div>
+              <div class="countdown-timer">
+                <p class="time-left-header">
+                  your TAC will expire in <span class="time-left">10:00</span>
+                  <a href="" class="resend-TAC-code">resend TAC code</a>
+                </p>
+              </div>
+              <button class="confirm-TAC">verify</button>
+            </div>
+          </div>
+        </div>
+        <div class="server-msg">
+          <div class="x-wrapper">
+            <p class="notice-text">attention</p>
+            <div class="x-container">
+              <ion-icon name="close-outline"></ion-icon>
+            </div>
+          </div>
+          <div class="message-wrapper">
+            <p class="server-msg-text">successfully updated user</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./javascripts/settings.js" defer></script>
+  </body>
+</html>

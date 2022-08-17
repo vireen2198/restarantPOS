@@ -14,7 +14,9 @@ const searchInput = getEl("#search-product-input");
 const tableNumber = window.location.search.split("=")[1];
 const tableNumberParent = getEl(".table-number-header");
 const backBtn = getEl("#add-new-product-btn");
+const payNowBtn = getEl("#pay-now-btn");
 tableNumberParent.textContent = `table number ${tableNumber}`;
+
 //token//headers
 const token = localStorage.getItem("user");
 if (!token || !tableNumber) {
@@ -225,7 +227,7 @@ const getTableCurrentOrder = async () => {
     currentBillParent.textContent = `RM ${Number(data.orders.tableBill).toFixed(
       2
     )}`;
-    return displayTableCurrentOrder(data.orders.a || []);
+    return displayTableCurrentOrder(data.orders.tableOrder || []);
   } catch (error) {
     console.log(error);
   }
@@ -344,4 +346,7 @@ searchInput.addEventListener("search", () => {
 });
 backBtn.addEventListener("click", () => {
   return redirectPage("cashier.html");
+});
+payNowBtn.addEventListener("click", () => {
+  return redirectPage(`pay-now.html?tableNumber=${tableNumber}`);
 });

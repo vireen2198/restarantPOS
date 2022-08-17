@@ -34,17 +34,14 @@ var TableSchema = new mongoose.Schema({
     ],
     default:undefined
   },
-
-  tableStatus:{
-    type:String,
-    enum:{
-      values:["vacant","occupied"],
-      message:"invalid table status"
-    },
-    default:"vacant"
-  },
   tableBill: {
     type: Number,
+    required:[true,"table current bill missing"],
+    default:0
+  },
+  totalToPay:{
+    type:Number,
+    required:[true,"table final amount missing"],
     default:0
   }
 

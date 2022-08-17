@@ -1,0 +1,183 @@
+
+#add-new-product-btn {
+    padding: 1vw;
+    border-radius: 0.2vw;
+    border: none;
+    outline: none;
+    font-size: 1.2vw;
+    background-color: mediumvioletred;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+  }
+  #add-new-product-btn:hover {
+    background-color: rgb(188, 54, 170);
+  }
+  .bill-container{
+    background-color: #fff;
+    border-radius: .3vw;
+    padding:1vw;
+    display: flex;
+    flex-direction: column;
+    gap:1vw;
+    font-size: 1.2vw;
+    margin-top: 1vw;
+  }
+
+  .address-date-container{
+    display:flex;
+    flex-direction: row;
+    align-items:flex-start;
+    justify-content: space-between;
+  }
+  .shop-name{
+    color:darkslategray;
+    font-weight: bolder;
+  }
+  .receipt-header{
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.8vw;
+  }
+  .bill-products-table{
+    width: 100%;
+    text-transform: capitalize;
+    background-color:darkslategray;
+    color:#fff
+  }
+  .bill-products-table th , .bill-products-table td{
+    padding:.5vw;
+    text-align: center;
+  }
+  .bill-products-table td {
+    color:black;
+    background-color:aliceblue;
+  }
+  .total-sub-total-parent{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding:.5vw;
+    text-transform: uppercase;
+    font-size: 1.3vw;
+   
+    font-weight: bolder;
+  }
+  .receipt-container{
+    display: flex;
+    flex-direction: column;
+    gap:1vw
+  }
+ .table-total-amount{
+  color:mediumvioletred;
+  font-size: 2vw;
+ }
+ .total-sub-total-parent hr{
+  width: 100%;
+  background-color: black;
+  margin: .5vw;
+ }
+#confirm-pay-now{
+  width: 100%;
+  font-size: 1.2vw;
+  background-color: seagreen;
+  border-radius: .3vw;
+  outline: none;
+  text-transform: uppercase;
+  letter-spacing: .1vw;
+  font-weight: bold;
+  color:#fff;
+  padding:1vw;
+  border: none;
+  transition: .3s ease-in;
+
+}
+#confirm-pay-now:hover{
+  background-color: darkgreen;
+
+}
+.address-container,.date-container{
+  text-transform: capitalize;
+}
+.page-wrapper{
+  position: relative;
+  z-index: 1;
+}
+.print-receipt-wrapper{
+  width: 100%;
+  background-color: rgba(0,0,0, 0.5);
+  height:50vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: -100%;
+  left: 0;
+  z-index: 0;
+  opacity: 0;
+}
+.show-print-receipt-wrapper{
+  top: 0;
+  left: 0;
+  z-index: 1;
+  opacity: 1;
+}
+.print-receipt-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  padding:2vw;
+  background-color: aliceblue;
+  border-radius: .3vw;
+  text-transform: uppercase;
+  color:midnightblue;
+  font-weight: bold;
+  font-size: 1.2vw;
+}
+.x-button{
+  
+  margin: 0;
+  margin-left: auto;
+  font-size: 1.8vw;
+  color:red;
+}
+.button-container{
+  display: flex;
+  flex-direction: row;
+  gap:1vw;
+  align-items: center;
+  justify-content: space-between;
+}
+.button-container input[type=button]{
+  padding:1vw;
+  text-transform: uppercase;
+  letter-spacing: .1vw;
+  font-size: 1vw;
+  border:none;
+  border-radius: .3vw;
+  color:#fff;
+}
+.with-receipt-btn{
+  background-color: seagreen;
+  transition: .3s ease-in;
+}
+.without-receipt-btn{
+  background-color: mediumvioletred;
+  transition: .3s ease-in;
+}
+.with-receipt-btn:hover{
+  background-color: darkgreen;
+}
+.without-receipt-btn:hover{
+  background-color: rgb(188, 54, 170);
+}
+@media only screen and (max-width: 1100px)  {
+  .print-receipt-wrapper{
+   height:60vw;
+  }
+}

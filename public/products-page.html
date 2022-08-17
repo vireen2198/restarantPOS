@@ -1,99 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./stylesheets/index.css">
-    <link rel="stylesheet" href="./stylesheets/products-page.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./images/th.jpg" />
+    <link rel="stylesheet" href="./stylesheets/index.css" />
+    <link rel="stylesheet" href="./stylesheets/products-page.css" />
     <title>Products Page</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="page-wrapper">
-        <nav>
-            <a href="./index.html">
-                <ion-icon name="home"></ion-icon>
-                home  
-            </a>
-            <a href="./products-page.html"  class="current-page-active">
-                <ion-icon name="fast-food"></ion-icon> 
-                products
-            </a>
-            <a href="http://">
-                <ion-icon name="layers"></ion-icon>
-                
-                transactions
-            </a>
-            <a href="./cashier.html">
-                <ion-icon name="cash"></ion-icon>
-                cashier
-                
-            </a>
-            <a href="http://">
-                <ion-icon name="settings"></ion-icon>
-                settings
-            </a>
-        </nav>
-        <div class="content-wrapper">
-            <div class="greeting-time-container">
-                <p class="greeting-admin">welcome salman</p>
-                <ion-icon name="power-sharp" class="log-out-button"></ion-icon>
-                <p class="date-time-text">Mon, 17 july 2022 1843 hours</p>
-            </div>
-            <div class="current-page-add-new-wrapper">
-                <a class="current-page">products</a>
-                <input type="button" value="Add New Product" id="add-new-product-btn">
-            </div>
-            
-                <div class="products-header-sort-wrapper">
-                    <p class="sub-title">
-                        All Products
-                    </p>
-                    <form class="search-box-parent">
-                        <input type="search" name="" id="search-products-box" placeholder="Search Products Here ...">
-                        <div class="search-btn-parent">
-                            <ion-icon name="search"></ion-icon>
-                        </div>
-                    </form>
-                   
-                    <div class="select-container">
-                        <p>sort by</p>
-                        <select name="" id="sort-by-products">
-                            <option value="date">most recent</option>
-                            <option value="-date">most oldest</option>
-                            <option value="-productPrice">price: high to low</option>
-                            <option value="productPrice">price: low to high</option>
-                            <option value="-productName" selected>alphabetical: A-Z</option>
-                            <option value="productName">alphabetical: Z-A</option>
-                        </select>
-                    </div>
-                </div>
+      <nav>
+        <a href="./index.html">
+          <ion-icon name="home"></ion-icon>
+          home
+        </a>
+        <a href="./products-page.html" class="current-page-active">
+          <ion-icon name="fast-food"></ion-icon>
+          products
+        </a>
+        <a href="http://">
+          <ion-icon name="layers"></ion-icon>
 
-                <div class="all-products-wrapper">
-
-                </div>
-                <div class="pagination-button-container">
-                    <ion-icon
-                      name="chevron-back-outline"
-                      class="back-Btn"
-                    ></ion-icon>
-                    <p class="number-of-page-current-page">Page 1/1</p>
-                    <ion-icon
-                      name="chevron-forward-outline"
-                      class="next-Btn"
-                    ></ion-icon>
-                  </div>
-        </div>        
-        <div class="loading-img-div">
-            <p>please wait patiently...</p>
-            <div class="loader">
-                
-            </div>
+          transactions
+        </a>
+        <a href="./cashier.html">
+          <ion-icon name="cash"></ion-icon>
+          cashier
+        </a>
+        <a href="./settings.html">
+          <ion-icon name="settings"></ion-icon>
+          settings
+        </a>
+      </nav>
+      <div class="content-wrapper">
+        <div class="greeting-time-container">
+          <p class="greeting-admin">welcome salman</p>
+          <ion-icon name="power-sharp" class="log-out-button"></ion-icon>
+          <p class="date-time-text">Mon, 17 july 2022 1843 hours</p>
         </div>
+        <div class="current-page-add-new-wrapper">
+          <a class="current-page">products</a>
+          <input
+            type="button"
+            value="Add New Product"
+            id="add-new-product-btn"
+          />
+        </div>
+
+        <div class="products-header-sort-wrapper">
+          <p class="sub-title">All Products</p>
+          <form class="search-box-parent">
+            <input
+              type="text"
+              name=""
+              id="search-products-box"
+              placeholder="Search Products Here ..."
+            />
+            <div class="search-btn-parent">
+              <ion-icon name="search"></ion-icon>
+            </div>
+          </form>
+
+          <div class="select-container">
+            <p>sort by</p>
+            <select name="" id="sort-by-products">
+              <option value="date">most recent</option>
+              <option value="-date">most oldest</option>
+              <option value="-productPrice">price: high to low</option>
+              <option value="productPrice">price: low to high</option>
+              <option value="productName" selected>alphabetical: A-Z</option>
+              <option value="-productName">alphabetical: Z-A</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="all-products-wrapper"></div>
+        <div class="pagination-button-container">
+          <ion-icon name="chevron-back-outline" class="back-Btn"></ion-icon>
+          <p class="number-of-page-current-page">Page 1/1</p>
+          <ion-icon name="chevron-forward-outline" class="next-Btn"></ion-icon>
+        </div>
+      </div>
+      <div class="loading-img-div">
+        <p>please wait patiently...</p>
+        <div class="loader"></div>
+      </div>
     </div>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./javascripts/products.js" defer></script>
-</body>
+  </body>
 </html>

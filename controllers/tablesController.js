@@ -30,7 +30,6 @@ module.exports = {
 
   async tableCurrentOrder(req, res) {
     try {
-      console.log(req.params);
       let orders = await tableService.tableCurrentOrder(req.params);
       return res
         .status(200)
@@ -45,8 +44,7 @@ module.exports = {
 
   async addTableCurrentOrder(req, res) {
     try {
-      console.log(req.params);
-      let orders = await tableService.addTableCurrentOrder(req.body);
+      let orders = await tableService.addTableCurrentOrder({...req.body,_id:req.user._id});
       return res
         .status(200)
         .json({ orders, message: "tables retrieved successfully" });
@@ -61,7 +59,7 @@ module.exports = {
   async modifyTableCurrentOrderItemQuantity(req, res) {
     try {
       let orders = await tableService.modifyTableCurrentOrderItemQuantity(
-        req.body
+        {...req.body,_id:req.user._id}
       );
       return res
         .status(200)
@@ -75,7 +73,7 @@ module.exports = {
   },
   async deleteSingleOrder(req, res) {
     try {
-      let orders = await tableService.deleteSingleOrder(req.body);
+      let orders = await tableService.deleteSingleOrder({...req.body,_id:req.user._id});
       return res.status(200).json({ message: "tables deleted successfully" });
     } catch (error) {
       return res.status(500).json({

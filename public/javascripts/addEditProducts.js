@@ -18,7 +18,7 @@ const submitBtn = getEl("#submit-product");
 const backToProductsPage = getEl("#go-to-products-page");
 const toUpdateId = window.location.search.split("=")[1];
 const noImgCover = getEl(".add-image-text-container");
-const logOutBtn=getEl(".log-out-button")
+const logOutBtn = getEl(".log-out-button");
 //token//headers
 const token = localStorage.getItem("user");
 if (!token) {
@@ -103,9 +103,9 @@ const sendToServer = async () => {
     const checkImageFile = productImageInput.files[0];
     let image64Str = undefined;
     const newObj = new Product(
-      productNameInput.value,
+      productNameInput.value.toLowerCase(),
       productPriceInput.value,
-      productDescInput.value,
+      productDescInput.value.toLowerCase(),
       "",
       productCategoryInput.value,
       productSizeInput.value
@@ -123,13 +123,11 @@ const sendToServer = async () => {
     }
 
     if (!toUpdateId) {
-      const { data } = await axios.post(
-        "/products/addProducts",
-         newObj, 
-         {headers}
-      );
+      const { data } = await axios.post("/products/addProducts", newObj, {
+        headers,
+      });
 
-      return serverMsg(data.message)
+      return serverMsg(data.message);
     } else {
       const { data } = await axios.post(
         "/products/editProducts",
@@ -139,7 +137,7 @@ const sendToServer = async () => {
       return serverMsg(data.message);
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     const { message } = error.response.data;
 
     if (message) return serverMsg(message, false);
@@ -154,7 +152,7 @@ const displayEditExistingProducts = (object) => {
     productDescription,
     productCategory,
   } = object;
-  
+
   productImageCover.setAttribute("src", productImageAddress);
   productNameInput.value = productName;
   productPriceInput.value = productPrice;
@@ -173,9 +171,9 @@ const displayExistingProduct = async (_id) => {
     console.log(error.response);
   }
 };
-const redirectPage=(route)=>{
-  return window.location.href=`${url}/${route}`
-}
+const redirectPage = (route) => {
+  return (window.location.href = `${url}/${route}`);
+};
 if (toUpdateId) {
   displayExistingProduct(toUpdateId);
 
@@ -196,7 +194,7 @@ class Product {
     this.productDescription = productDescription;
     this.productImageAddress = productImageAddress;
     this.productCategory = productCategory;
-    this.productSize=productSize
+    this.productSize = productSize;
   }
 }
 
@@ -244,7 +242,7 @@ productDescInput.addEventListener("keyup", () => {
 backToProductsPage.addEventListener("click", () => {
   return (window.location.href = `${url}/products-page.html`);
 });
-logOutBtn.addEventListener("click",()=>{
+logOutBtn.addEventListener("click", () => {
   localStorage.removeItem("user");
-  return redirectPage("login.html")
-})
+  return redirectPage("login.html");
+});

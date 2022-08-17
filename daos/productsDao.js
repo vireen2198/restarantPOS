@@ -4,22 +4,22 @@ const Products = require('../models/Products')
 module.exports = {
 
     async addProducts(params) {
-        return await Products.create(params)
+        const {productName,productPrice,productDescription,productImageAddress,productCategory,productSize}=params
+        return await Products.create({productName:productName.toLowerCase(),productDescription:productDescription.toLowerCase(),productImageAddress,productCategory,productSize,productPrice})
     },
 
     async getProducts(queries) {
-        console.log(queries)
         let limitInApage=12;
         let skipItems=limitInApage*(Number(queries.page)-1);
         const data=await Products.find(
             { $or: [ 
-                { productName: { $regex: queries.productName } }
+                { productName: { $regex: queries.productName.toLowerCase() } }
              ] }
         ).select("_id");
         let totalPages=Math.ceil(data.length/limitInApage)
         const products = await Products.find(
             { $or: [ 
-                { productName: { $regex: queries.productName } }
+                { productName: { $regex: queries.productName.toLowerCase() } }
              ] }
         ).limit(limitInApage).skip(skipItems).sort(queries.sort);
         return {totalPages,products}
@@ -32,7 +32,8 @@ module.exports = {
         return await Products.find({}).sort(params.sort)
     },
     async editProducts(params) {
-        return await Products.findOneAndUpdate({'_id' : params._id}, params)
+        const {_id,productName,productPrice,productDescription,productImageAddress,productCategory,productSize}=params
+        return await Products.findOneAndUpdate({_id},{productName:productName.toLowerCase(),productDescription:productDescription.toLowerCase(),productImageAddress,productCategory,productSize,productPrice})
     },
 
     async deleteProducts(params) {

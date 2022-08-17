@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./images/th.jpg" />
+    <link rel="stylesheet" href="./stylesheets/index.css" />
+    <link rel="stylesheet" href="./stylesheets/add-new-worker.css" />
+    <link rel="stylesheet" href="./stylesheets/server-msg.css" />
+    <title>Add New Worker</title>
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <nav>
+        <a href="./index.html">
+          <ion-icon name="home"></ion-icon>
+          home
+        </a>
+        <a href="./products-page.html">
+          <ion-icon name="fast-food"></ion-icon>
+          products
+        </a>
+        <a href="">
+          <ion-icon name="layers"></ion-icon>
+
+          transactions
+        </a>
+        <a href="./cashier.html">
+          <ion-icon name="cash"></ion-icon>
+          cashier
+        </a>
+        <a href="./settings.html" class="current-page-active">
+          <ion-icon name="settings"></ion-icon>
+          settings
+        </a>
+      </nav>
+      <div class="content-wrapper">
+        <div class="greeting-time-container">
+          <p class="greeting-admin">welcome salman</p>
+          <ion-icon name="power-sharp" class="log-out-button"></ion-icon>
+          <p class="date-time-text">Mon, 17 july 2022 1843 hours</p>
+        </div>
+        <div class="current-page-add-new-wrapper">
+          <a class="current-page">add new worker</a>
+          <input
+            type="button"
+            value="back to settings"
+            id="go-to-products-page"
+          />
+        </div>
+        <form action="" class="add-new-worker-wrapper">
+          <p class="add-new-worker-header">
+            fill up this form to add a new worker
+          </p>
+          <p class="notice-header">
+            note: only admins are allowed to add a new worker in your
+            organisation. if you are not an admin please contact your system
+            admin for assistance
+          </p>
+          <div class="question-input-wrapper">
+            <p class="notice-header">note: set a username for your worker.</p>
+            <p class="notice-header">
+              reminder: please make sure that your username consists of at least
+              1 uppercase letter, 1 special character and 1 number.
+            </p>
+            <p class="question-header">username</p>
+            <div class="input-container">
+              <input
+                type="text"
+                name=""
+                id="username-input"
+                placeholder="Salman0312@"
+                pattern="^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,16}$"
+                minlength="4"
+                maxlength="15"
+                autofocus
+                required
+              />
+            </div>
+          </div>
+
+          <div class="question-input-wrapper">
+            <p class="notice-header">
+              note: set a default password for your worker.
+            </p>
+            <p class="notice-header">
+              reminder: please make sure that your password consists of at least
+              1 uppercase letter, 1 special character and 1 number.
+            </p>
+            <p class="question-header">password</p>
+            <div class="input-container">
+              <input
+                type="password"
+                name=""
+                id="password-input"
+                placeholder="Salman0312@"
+                pattern="^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,16}$"
+                minlength="4"
+                maxlength="15"
+                required
+              />
+            </div>
+          </div>
+          <div class="question-input-wrapper">
+            <p class="question-header">email</p>
+            <div class="input-container">
+              <input
+                type="email"
+                name=""
+                id="email-input"
+                placeholder="salman0312@gmail.com"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="question-input-wrapper">
+            <p class="question-header">worker type</p>
+            <div class="checkbox-wrapper">
+              <div class="checkbox-container">
+                <input
+                  type="radio"
+                  name="is-admin"
+                  id="normal-worker"
+                  value="false"
+                  checked
+                  required
+                />
+                <label for="">worker</label>
+              </div>
+              <div class="checkbox-container">
+                <input
+                  type="radio"
+                  name="is-admin"
+                  id="admin-worker"
+                  value="true"
+                />
+                <label for="">administrator</label>
+              </div>
+            </div>
+          </div>
+          <div class="question-input-wrapper">
+            <input
+              type="button"
+              value="submit new worker"
+              id="submit-new-worker"
+            />
+          </div>
+          <div class="server-msg">
+            <div class="x-wrapper">
+              <p class="notice-text">attention</p>
+              <div class="x-container">
+                <ion-icon name="close-outline"></ion-icon>
+              </div>
+            </div>
+            <div class="message-wrapper">
+              <p class="server-msg-text">successfully updated user</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./javascripts/addNewWorker.js" defer></script>
+  </body>
+</html>

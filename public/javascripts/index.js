@@ -1,9 +1,9 @@
 const getElByClass = (elName, parent) => {
-    return parent.querySelector(elName)
-}
+  return parent.querySelector(elName);
+};
 const getElementsByClass = (elName, parent = document) => {
-    return parent.querySelectorAll(elName)
-}
+  return parent.querySelectorAll(elName);
+};
 // const statsUi=[...getElementsByClass(".stats-ui")];
 // statsUi.map(el=>{
 //     const getRandom255=()=>{return Math.floor(Math.random()*255)+1};

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./images/th.jpg" />
+    <link rel="stylesheet" href="./stylesheets/index.css" />
+    <link rel="stylesheet" href="./stylesheets/pay-now.css" />
+
+    <title>Products Page</title>
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <nav>
+        <a href="./index.html">
+          <ion-icon name="home"></ion-icon>
+          home
+        </a>
+        <a href="./products-page.html">
+          <ion-icon name="fast-food"></ion-icon>
+          products
+        </a>
+        <a href="http://">
+          <ion-icon name="layers"></ion-icon>
+
+          transactions
+        </a>
+        <a href="./cashier.html" class="current-page-active">
+          <ion-icon name="cash"></ion-icon>
+          cashier
+        </a>
+        <a href="./settings.html">
+          <ion-icon name="settings"></ion-icon>
+          settings
+        </a>
+      </nav>
+      <div class="content-wrapper">
+        <div class="greeting-time-container">
+          <p class="greeting-admin"></p>
+          <ion-icon name="power-sharp" class="log-out-button"></ion-icon>
+          <p class="date-time-text"></p>
+        </div>
+        <div class="current-page-add-new-wrapper">
+          <a class="current-page">Pay Now</a>
+          <input type="button" value="Back to Table" id="add-new-product-btn" />
+        </div>
+        <div class="bill-container">
+          <div class="address-date-container">
+            <div class="address-container">
+              <p class="shop-name"></p>
+              <p class="address-line-1"></p>
+              <p class="balance-address"></p>
+              <p class="shop-number"></p>
+            </div>
+            <div class="date-container">
+              <p class="current-date"></p>
+              <p class="server-details">
+                Server Name: <span class="server-name"></span>
+              </p>
+            </div>
+          </div>
+          <h2 class="receipt-header">receipt</h2>
+          <div class="receipt-container">
+            <table class="bill-products-table">
+              <tr>
+                <th>product</th>
+                <th>quantity</th>
+                <th>price (RM)</th>
+                <th>total (RM)</th>
+              </tr>
+              <tr>
+                <td>Apple juice</td>
+                <td>2</td>
+                <td>5</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>Pakistani Chai</td>
+                <td>4</td>
+                <td>3</td>
+                <td>12</td>
+              </tr>
+            </table>
+            <div class="total-sub-total-parent">
+              <p class="sub-total-parent">
+                Subtotal : <span class="table-sub-total">rm 0.00</span>
+              </p>
+              <p class="taxes-parent">
+                service charges : <span class="shop-service-charges">0%</span>
+              </p>
+              <p class="taxes-parent">
+                taxes : <span class="shop-taxes">0%</span>
+              </p>
+              <hr />
+              <p class="total-parent">
+                Total : <span class="table-total-amount">Rm 0.00</span>
+              </p>
+            </div>
+            <input type="button" value="pay now" id="confirm-pay-now" />
+          </div>
+        </div>
+      </div>
+      <div class="print-receipt-wrapper">
+        <div class="print-receipt-container">
+          <ion-icon name="close-circle" class="x-button"></ion-icon>
+          <p class="print-header">do you want to print your receipt?</p>
+          <div class="button-container">
+            <input
+              type="button"
+              value="continue with receipt"
+              class="with-receipt-btn"
+            />
+            <input
+              type="button"
+              value="continue without receipt"
+              class="without-receipt-btn"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./javascripts/payNow.js" defer></script>
+  </body>
+</html>

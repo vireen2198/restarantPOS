@@ -51,8 +51,6 @@ module.exports = function (passport) {
             return req.res.status(401).send({ error: true, message: "Data tempered detected. Details do not match - 4" })
           }
           let rUser = JSON.parse(JSON.stringify(user))
-          rUser.password = undefined
-          rUser.username = user.username
           
           return done(null, rUser)
         }).catch(e => {
