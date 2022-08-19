@@ -22,10 +22,9 @@ module.exports = {
             try {
                 const data=await client.verify.v2.services(serviceSID)
                 .verifications
-                .create({to: phoneNumber, channel: 'whatsapp'});
+                .create({to: phoneNumber, channel: 'sms'});
                 return 
             } catch (error) {
-                console.log(error)
                   throw new Error(error.message)
             }
 
