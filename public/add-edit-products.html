@@ -109,13 +109,13 @@
           <div class="product-input-wrapper">
             <input
               type="text"
-              oninput="this.value = this.value.replace(/[^0-9\.]/g, '').split(/\./).slice(0, 3).join('.')"
+              
               lang="en"
               id="product-price-input"
               placeholder="product price required (RM)"
               required
               minlength="1"
-              maxlength="5"
+              maxlength="7"
             />
           </div>
           <p class="add-new-product-header">product description (optional)</p>
@@ -126,9 +126,9 @@
               cols="30"
               rows="10"
               placeholder="say something about your products (optional)"
-              maxlength="300"
+              maxlength="1000"
             ></textarea>
-            <p class="characters-remaining">300 characters remaining</p>
+            <p class="characters-remaining">1000 characters remaining</p>
           </div>
           <p class="server-msg">this one is error</p>
           <div class="product-input-wrapper display-column">

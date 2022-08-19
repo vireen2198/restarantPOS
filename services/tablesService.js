@@ -1,12 +1,14 @@
 let tablesDao = require("../daos/tablesDao");
-
+let userService=require("./userService")
 module.exports = {
   async getTables() {
     return await tablesDao.getTables();
   },
 
   async registerTables(tables) {
-    let data = await tablesDao.registerTables(tables);
+    const data=await userService.sendUser(tables.userId);
+    if(!data.isAdmin)throw new Error("you do not have enough permission!!! admin assistance required")
+    await tablesDao.registerTables(tables);
     return data;
   },
   async tableCurrentOrder(tableNumber) {

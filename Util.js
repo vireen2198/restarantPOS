@@ -25,6 +25,7 @@ module.exports = {
                 .create({to: phoneNumber, channel: 'whatsapp'});
                 return 
             } catch (error) {
+                console.log(error)
                   throw new Error(error.message)
             }
 

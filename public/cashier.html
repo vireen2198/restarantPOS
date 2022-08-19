@@ -36,19 +36,51 @@
       </nav>
       <div class="content-wrapper">
         <div class="greeting-time-container">
-          <p class="greeting-admin">welcome salman</p>
+          <p class="greeting-admin"></p>
           <ion-icon name="power-sharp" class="log-out-button"></ion-icon>
-          <p class="date-time-text">Mon, 17 july 2022 1843 hours</p>
+          <p class="date-time-text"></p>
         </div>
         <div class="current-page-add-new-wrapper">
           <a class="current-page">Cashier</a>
           <input
             type="button"
-            value="View All Tables"
+            value="home"
             id="go-to-products-page"
           />
         </div>
-        <div class="tables-display-wrapper"></div>
+        <div class="search-select-wrapper">
+          <div class="select-input-container">
+            <p class="search-select-header">search by table number: </p>
+            <input type="search" name="" id="search-table-input" 
+            placeholder="e.g: 10"
+            minlength="1"
+            maxlength="3"
+            pattern="^[0-9]*$">
+          </div>
+          <div class="select-input-container">
+            <p class="search-select-header">sort: </p>
+            <select name="" id="sort-tables-select">
+              <option value="" disabled hidden selected>sort your tables here....</option>
+              <option value="occupied">occupied</option>
+              <option value="vacant">vacant</option>
+              <option value="all">all tables</option>
+            </select>
+          </div>
+  
+        </div>
+        <div class="tables-display-wrapper">
+
+        </div>
+        <div class="pagination-current-page-wrapper">
+          <div class="pagination-current-page-container">
+              <ion-icon name="chevron-back" class="back-btn"></ion-icon>
+              <p class="current-pagination-page">
+                page 1/1
+              </p>
+              <ion-icon name="chevron-forward" class="fwd-btn"></ion-icon>
+            </div>
+          </div>
+       
       </div>
     </div>
     <script

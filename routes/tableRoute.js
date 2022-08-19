@@ -8,7 +8,7 @@ router.get(
   passport.authenticate("user-rule", { session: false }),
   tablesController.getTables
 );
-router.post("/registerTables", tablesController.registerTables);
+router.post("/registerTables",passport.authenticate("user-rule", { session: false }), tablesController.registerTables);
 router.get(
   "/tableCurrentOrder/:tableNumber",
   passport.authenticate("user-rule", { session: false }),

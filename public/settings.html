@@ -60,6 +60,11 @@
             <ion-icon name="people"></ion-icon>
             <p class="current-page-active-header">Workers</p>
           </div>
+          <hr class="current-line-not-active" />
+          <div class="current-page-active-container">
+            <ion-icon name="albums-sharp"></ion-icon>
+            <p class="current-page-active-header">Tables</p>
+          </div>
         </div>
         <div class="form-wrapper">
           <form class="settings-wrapper form-1 current-active-form-showing">
@@ -269,13 +274,69 @@
                     </div>
                     
                 </div> -->
+                <div class="question-input-wrapper">
+                  <input type="button" value="next page" class="next-page-btn" />
+                </div>
+                <div class="question-input-wrapper">
+                  <input
+                    type="button"
+                    value="Add New Worker"
+                    class="submit-next-page-btn"
+                  />
+                </div>
+          </form>
+          <form class="settings-wrapper form-4">
+            <p class="setting-header">edit your shop here</p>
+            <p class="back-page-link">
+              <ion-icon name="chevron-back"></ion-icon> Back to user settings
+            </p>
+            <p class="setting-header">
+              add/delete current tables (admin only)
+            </p>
             <div class="question-input-wrapper">
+              <p class="question-header">number of tables</p>
               <input
-                type="button"
-                value="Add New Worker"
-                class="submit-next-page-btn"
+                type="text"
+                name=""
+                id="number-of-tables-input"
+                placeholder="e.g: 20"
+                minlength="1"
+                maxlength="3"
+                pattern="^[0-9]*$"
+                required
               />
             </div>
+            <!-- <div class="current-worker-container">
+                    <p class="worker-name">salman <span class="worker-is-admin">(admin)</span></p>
+                    <div class="edit-delete-container">
+                        <ion-icon name="create" class="edit-worker"></ion-icon>
+                        <ion-icon name="trash" class="trash"></ion-icon>
+                    </div>
+                    
+                </div>
+                <div class="current-worker-container">
+                    <p class="worker-name">salman <span class="worker-is-admin">(admin)</span></p>
+                    <div class="edit-delete-container">
+                        <ion-icon name="create" class="edit-worker"></ion-icon>
+                        <ion-icon name="trash" class="trash"></ion-icon>
+                    </div>
+                    
+                </div>
+                <div class="current-worker-container">
+                    <p class="worker-name">salman <span class="worker-is-admin">(admin)</span></p>
+                    <div class="edit-delete-container">
+                        <ion-icon name="create" class="edit-worker"></ion-icon>
+                        <ion-icon name="trash" class="trash"></ion-icon>
+                    </div>
+                    
+                </div> -->
+                <div class="question-input-wrapper">
+                  <input
+                    type="button"
+                    value="edit tables"
+                    class="submit-next-page-btn"
+                  />
+                </div>
           </form>
           <div class="TAC-wrapper">
             <div class="close-TAC-container">

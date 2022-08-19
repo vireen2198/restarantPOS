@@ -5,7 +5,9 @@ const sendUser=async (params)=>{
     try {
 
         const user=await User.findOne({_id:params}).select("-password");
+        if(!user)throw new Error("unauthorised")
         const company=await Company.find().select("-_id")
+        if(!company[0])throw new Error("company profile error !!! please contact our maintanance team")
         const {businessEmail,companyName,mobileNumber,address,tax,serviceCharges}=company[0];
         const {username,email,password,userMobileNumber,isAdmin}=user
         return {businessEmail,companyName,mobileNumber,address,tax,serviceCharges,username,email,password,userMobileNumber,isAdmin};

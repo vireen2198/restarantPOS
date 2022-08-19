@@ -8,11 +8,11 @@ const getAllEl = (elName, parent = document) => {
 //variables
 const productNameInput = getEl("#product-name-input");
 const productPriceInput = getEl("#product-price-input");
+
 const productDescInput = getEl("#product-desc-input");
 const productImageInput = getEl("#product-image-input");
 const productSizeInput = getEl("#product-size-input");
 const productImageCover = getEl(".product-img-input-display");
-
 const productCategoryInput = getEl("#product-category-input");
 const submitBtn = getEl("#submit-product");
 const backToProductsPage = getEl("#go-to-products-page");
@@ -72,7 +72,6 @@ const displayDateTimeDay = () => {
     monthArray[month]
   } ${year}, ${a.toString().split(" ")[4]} ${morningEvening}`;
 };
-setInterval(displayDateTimeDay, 1000);
 const getImage = (element) => {
   return new Promise((resolve, reject) => {
     let file = element.files[0];
@@ -174,6 +173,23 @@ const displayExistingProduct = async (_id) => {
 const redirectPage = (route) => {
   return (window.location.href = `${url}/${route}`);
 };
+const loadPageError = () => {
+  localStorage.removeItem("user");
+  return redirectPage("login.html");
+};
+const fetchUser = async () => {
+  try {
+    const { data } = await axios.get("/users/getUser", { headers });
+    const greetingText = getEl(".greeting-admin");
+    greetingText.textContent = `welcome ${data.user.username}`;
+  } catch (error) {
+    return loadPageError();
+  }
+};
+window.addEventListener("load",()=>{
+  setInterval(displayDateTimeDay, 1000);
+  fetchUser()
+})
 if (toUpdateId) {
   displayExistingProduct(toUpdateId);
 
@@ -200,6 +216,11 @@ class Product {
 
 //event listeners
 submitBtn.addEventListener("click", () => {
+  const displayErrorPriceInput=()=>{
+    productPriceInput.setCustomValidity('Invalid Product Price');
+    productPriceInput.reportValidity()
+    
+  }
   if (!toUpdateId) {
     const allInputs = [
       productImageInput,
@@ -209,6 +230,13 @@ submitBtn.addEventListener("click", () => {
       productCategoryInput,
     ];
     const validity = allInputs.every((input) => input.reportValidity());
+    const testProductPrice=/^[1-9]{1}\d{1,3}(\.\d{0,2})?$/.test(productPriceInput.value);
+    
+    if(!testProductPrice){
+
+      return displayErrorPriceInput()
+      
+    }
     if (!validity) return;
     return sendToServer();
   }
@@ -219,6 +247,12 @@ submitBtn.addEventListener("click", () => {
     productCategoryInput,
   ];
   const validity = allInputs.every((input) => input.reportValidity());
+  if (!validity) return;
+  const testProductPrice=/^[1-9]{1}\d{1,3}(\.\d{0,2})?$/.test(productPriceInput.value);
+  if(!testProductPrice){
+
+    return displayErrorPriceInput()
+  }
   if (!validity) return;
   return sendToServer();
 });
@@ -234,7 +268,7 @@ productImageInput.addEventListener("change", async () => {
 });
 productDescInput.addEventListener("keyup", () => {
   const charactersRemainingText = getEl(".characters-remaining");
-  const charactersLength = 300;
+  const charactersLength = 1000;
   charactersRemainingText.textContent = `${
     charactersLength - productDescInput.value.length
   } characters remaining`;

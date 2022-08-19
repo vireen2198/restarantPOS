@@ -71,7 +71,8 @@ const displayDateTimeDay = () => {
     monthArray[month]
   } ${year}, ${a.toString().split(" ")[4]} ${morningEvening}`;
 };
-setInterval(displayDateTimeDay, 1000);
+
+
 
 const redirectPage = (route) => {
   return (window.location.href = `${url}/${route}`);
@@ -214,7 +215,7 @@ const searchProducts = async (value) => {
     return loadPageError();
   }
 };
-getProducts();
+
 //table current order
 const getTableCurrentOrder = async () => {
   try {
@@ -232,7 +233,7 @@ const getTableCurrentOrder = async () => {
     console.log(error);
   }
 };
-getTableCurrentOrder();
+
 const displayTableCurrentOrder = (array) => {
   const tableParent = document.querySelector(".current-order-container");
   const tr = createEl("tr");
@@ -335,6 +336,22 @@ const addNewProductToCurrentOrder = async (productId, tableNumber) => {
     console.log(error);
   }
 };
+//user
+const fetchUser = async () => {
+  try {
+    const { data } = await axios.get("/users/getUser", { headers });
+    const greetingText = getEl(".greeting-admin");
+    greetingText.textContent = `welcome ${data.user.username}`;
+  } catch (error) {
+    return loadPageError();
+  }
+};
+window.addEventListener("load",()=>{
+  setInterval(displayDateTimeDay, 1000);
+  fetchUser()
+  getProducts()
+  getTableCurrentOrder();
+})
 //event listener
 logOutBtn.addEventListener("click", () => {
   localStorage.removeItem("user");

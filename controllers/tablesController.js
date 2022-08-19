@@ -21,10 +21,10 @@ module.exports = {
 
   async registerTables(req, res) {
     try {
-      await tableService.registerTables(req.body);
-      return res.status(201).json({ message: "tables successfully added" });
+      await tableService.registerTables({...req.body,userId:req.user._id});
+      return res.status(201).json({ message: "tables successfully updated" });
     } catch (error) {
-      console.log(error);
+      return res.status(500).json({e:true,message:error.message});
     }
   },
 
@@ -35,10 +35,7 @@ module.exports = {
         .status(200)
         .json({ orders, message: "tables retrieved successfully" });
     } catch (error) {
-      return res.status(500).json({
-        error,
-        message: "something went wrong!!! please try again later",
-      });
+      return res.status(500).json({e:true,message:error.message});
     }
   },
 
@@ -65,10 +62,7 @@ module.exports = {
         .status(200)
         .json({ orders, message: "tables retrieved successfully" });
     } catch (error) {
-      return res.status(500).json({
-        error,
-        message: "something went wrong!!! please try again later",
-      });
+      return res.status(500).json({e:true,message:error.message});
     }
   },
   async deleteSingleOrder(req, res) {
@@ -76,10 +70,7 @@ module.exports = {
       let orders = await tableService.deleteSingleOrder({...req.body,_id:req.user._id});
       return res.status(200).json({ message: "tables deleted successfully" });
     } catch (error) {
-      return res.status(500).json({
-        error,
-        message: "something went wrong!!! please try again later",
-      });
+      return res.status(500).json({e:true,message:error.message});
     }
   },
 };

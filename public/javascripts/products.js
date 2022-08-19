@@ -70,7 +70,6 @@ const displayDateTimeDay = () => {
   } ${year}, ${a.toString().split(" ")[4]} ${morningEvening}`;
 };
 
-setInterval(displayDateTimeDay, 1000);
 
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -84,10 +83,23 @@ const displayLoader = async () => {
 const redirectPage = (route) => {
   return (window.location.href = `${url}/${route}`);
 };
+const loadPageError = () => {
+  localStorage.removeItem("user");
+  return redirectPage("login.html");
+};
+const fetchUser = async () => {
+  try {
+    const { data } = await axios.get("/users/getUser", { headers });
+    const greetingText = getEl(".greeting-admin");
+    greetingText.textContent = `welcome ${data.user.username}`;
+  } catch (error) {
+    return loadPageError();
+  }
+};
+
 const getProducts = async (value = "") => {
   try {
     const sortBy = getEl("#sort-by-products");
-
     const { data } = await axios.post(
       `/products/getProducts?sort=${sortBy.value}&page=${currentPage}&productName=${value}`,
       {},
@@ -155,7 +167,7 @@ const displayAllProducts = async (value) => {
       allProductsParent.appendChild(div);
     });
   } catch (error) {
-    console.log(error);
+    return loadPageError()
   }
 };
 
@@ -189,12 +201,13 @@ const displayNoProducts = (hasValue = false) => {
   }
   const contentWrapper = getEl(".content-wrapper");
   const noContentParent = getAllEl(".no-content-parent");
+  const appendBeforeEl=getEl(".all-products-wrapper")
   if (noContentParent.length) {
     noContentParent.forEach((parent) => {
       contentWrapper.removeChild(parent);
     });
   }
-  contentWrapper.appendChild(div);
+  contentWrapper.insertBefore(div,appendBeforeEl);
 };
 const changePage = async (operator) => {
   const totalPages = Number(
@@ -216,7 +229,12 @@ const changePage = async (operator) => {
       }
   }
 };
-displayAllProducts();
+window.addEventListener("load",()=>{
+  setInterval(displayDateTimeDay, 1000);
+  fetchUser()
+  displayAllProducts();
+})
+
 
 //event listener
 addNewProductsPage.addEventListener("click", () => {

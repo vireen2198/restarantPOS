@@ -80,13 +80,34 @@ module.exports = {
       let tables = await Tables.find().sort("tableNumber");
       return tables;
     } catch (error) {
-      return new Error(error);
+      throw new Error(error.message);
     }
   },
-  async registerTables(numberOfTables) {
-    for (let i = 1; i <= Number(numberOfTables.tables); i++) {
-      let tables = await Tables.create({ tableNumber: i });
+  async registerTables(tables) {
+    try {
+      const currentNumberOfTables=await this.getTables();
+      const {numberOfTables}=tables;
+      if(!numberOfTables)throw new Error("invalid number of tables");
+      if(currentNumberOfTables.length==numberOfTables)throw new Error(`you already have ${numberOfTables} tables`);
+      if(Number(numberOfTables)>currentNumberOfTables.length){
+        for(let i=currentNumberOfTables.length+1;i<=Number(numberOfTables);i++){
+          let data = await Tables.create({tableNumber:i}); 
+        }
+      }
+      if(Number(numberOfTables)<currentNumberOfTables.length){
+        for(let i=currentNumberOfTables.length;i>Number(numberOfTables);i--){
+          const table=await this.tableCurrentOrder({tableNumber:i})
+          if(table.tableBill||table.totalToPay)throw new Error("please make sure that tables are empty before deleting it");   
+        }
+        for(let i=currentNumberOfTables.length;i>Number(numberOfTables);i--){
+          let data = await Tables.deleteOne({tableNumber:i})
+        }
+      }
+    } catch (error) {
+      throw new Error(error.message)
     }
+
+
   },
   async tableCurrentOrder(table) {
     let data = await Tables.findOne({

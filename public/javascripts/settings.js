@@ -29,6 +29,7 @@ const businessEmailDetailsInput = getEl("#business-email-input");
 const usernameInput = getEl("#username-input");
 const emailAddressInput = getEl("#email-address-input");
 const userMobileNumberInput = getEl("#user-mobile-number-input");
+const numberOfTablesInput=getEl("#number-of-tables-input")
 const xContainer = getEl(".x-container");
 const serverMsgText = getEl(".server-msg-text");
 const serverMsgParent = getEl(".server-msg");
@@ -114,6 +115,13 @@ const changeForm = (i) => {
     hrLine[0].classList.add("current-line-active");
   }
   if (i == 2) {
+    hrLine.pop()
+    hrLine.map((line) => {
+      line.classList.add("current-line-active");
+    });
+  }
+  if (i == 3) {
+  
     hrLine.map((line) => {
       line.classList.add("current-line-active");
     });
@@ -553,16 +561,16 @@ const fetchAllUser = async () => {
     const { data } = await axios.get("/users/getAllUser", { headers });
     return displayExistingUsers(data.users);
   } catch (error) {
-    console.log(error);
+    return loadPageError();
   }
 };
-const routeToSendToServer = async (object) => {
+const routeToSendToServer = async (route,object) => {
   try {
-    const { data } = await axios.post("/users/settings", object, { headers });
+    const { data } = await axios.post(route, object, { headers });
 
     displayServerMessage(data.message);
   } catch (error) {
-    console.log(error);
+    return displayServerMessage(error.response.data.message|| "something went wrong!!! please try again later");
   }
 };
 const submitDataToServer = (index) => {
@@ -570,7 +578,7 @@ const submitDataToServer = (index) => {
   const selects = getAllEl("select", formParents[index]);
 
   var allInputs;
-  if (index === 0) {
+  if (index === 0 || index === 3) {
     allInputs = [...inputs, ...selects];
     const results = allInputs.every((el) => el.reportValidity());
     if (!results) return;
@@ -583,7 +591,6 @@ const submitDataToServer = (index) => {
     allInputs = [...inputs, ...selects];
     const results = allInputs.every((el) => el.reportValidity());
     if (!results) return;
-    console.log(results);
   }
 
   switch (index) {
@@ -600,7 +607,7 @@ const submitDataToServer = (index) => {
         businessContactDetailsInput.value,
         businessEmailDetailsInput.value
       );
-      routeToSendToServer({ business });
+      routeToSendToServer("/users/settings",{ business });
       break;
     case 1:
       const user = new User(
@@ -608,11 +615,15 @@ const submitDataToServer = (index) => {
         emailAddressInput.value,
         userMobileNumberInput.value
       );
-      routeToSendToServer({ user });
+      routeToSendToServer("/users/settings",{ user });
       break;
     case 2:
       redirectPage("add-new-user.html");
       break;
+    case 3:
+        const tables=new Tables(Number(numberOfTablesInput.value));
+        routeToSendToServer("/tables/registerTables",tables);
+      break
   }
 };
 const sendNumberToServer = async (phoneNumber) => {
@@ -624,13 +635,15 @@ const sendNumberToServer = async (phoneNumber) => {
     );
     displayTACWrapper();
   } catch (error) {
-    return displayServerMessage(error.response.data.message);
+    return displayServerMessage(error.response.data.message || "something went wrong!!! please try again later");
   }
 };
+window.addEventListener("load",()=>{
+  fetchAllUser();
+  setInterval(displayDateTimeDay, 1000);
+  fetchUser();
+})
 
-fetchAllUser();
-setInterval(displayDateTimeDay, 1000);
-fetchUser();
 
 //classes
 class Business {
@@ -665,6 +678,11 @@ class User {
     this.username = username;
     this.email = email;
     this.userMobileNumber = userMobileNumber;
+  }
+}
+class Tables {
+  constructor(numberOfTables) {
+    this.numberOfTables=numberOfTables
   }
 }
 

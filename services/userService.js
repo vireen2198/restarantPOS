@@ -1,4 +1,4 @@
-const { addNewWorker } = require('../controllers/userController')
+
 const userDao = require('../daos/userDao')
 
 module.exports = {

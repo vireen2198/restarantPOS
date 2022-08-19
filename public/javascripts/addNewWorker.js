@@ -1,3 +1,5 @@
+
+
 const getEl = (elName, parent = document) => {
   return parent.querySelector(elName);
 };
@@ -89,6 +91,16 @@ const displayServerMessage = (
   serverMsgParent.classList.add("show-server-err-msg");
   serverMsgText.textContent = message;
 };
+//server fn
+const fetchUser = async () => {
+  try {
+    const { data } = await axios.get("/users/getUser", { headers });
+    const greetingText = getEl(".greeting-admin");
+    greetingText.textContent = `welcome ${data.user.username}`;
+  } catch (error) {
+    return loadPageError();
+  }
+};
 const sendWorkerToServer = async () => {
   try {
     const usernameInput = getEl("#username-input");
@@ -113,8 +125,11 @@ const sendWorkerToServer = async () => {
     );
   }
 };
+window.addEventListener("load",()=>{
+  setInterval(displayDateTimeDay, 1000);
+  fetchUser()
+})
 
-setInterval(displayDateTimeDay, 1000);
 
 //event listener
 logOutBtn.addEventListener("click", () => {
